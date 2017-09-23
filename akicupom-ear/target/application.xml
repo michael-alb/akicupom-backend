@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd" version="7">
+  <display-name>akicupom-ear</display-name>
+  <module>
+    <web>
+      <web-uri>akicupom-web.war</web-uri>
+      <context-root>/akicupom-web</context-root>
+    </web>
+  </module>
+  <module>
+    <ejb>akicupom-ejb.jar</ejb>
+  </module>
+  <library-directory>lib</library-directory>
+</application>
