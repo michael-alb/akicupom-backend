@@ -35,8 +35,12 @@ public class Fornecedor implements Serializable {
 	@Column(nullable=false)
 	private String telefone;
 	
+	/* Mapeamento Relacional */
+	
 	@OneToMany(mappedBy="fornecedor")
-	private Collection<Cupom> cupom;
+	private Collection<Promocao> promocao;
+	
+	/* Getters e Setters */
 
 	public Long getId() {
 		return id;
@@ -78,12 +82,12 @@ public class Fornecedor implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public Collection<Cupom> getCupom() {
-		return cupom;
+	public Collection<Promocao> getPromocao() {
+		return promocao;
 	}
 
-	public void setCupom(Collection<Cupom> cupom) {
-		this.cupom = cupom;
+	public void setPromocao(Collection<Promocao> promocao) {
+		this.promocao = promocao;
 	}
 
 	@Override
@@ -114,6 +118,6 @@ public class Fornecedor implements Serializable {
 	@Override
 	public String toString() {
 		return "Fornecedor [id=" + id + ", nome=" + nome + ", cnpj=" + cnpj + ", endereco=" + endereco + ", telefone="
-				+ telefone + ", cupom=" + cupom + "]";
-	}
+				+ telefone + ", promocao=" + promocao + "]";
+	}	
 }

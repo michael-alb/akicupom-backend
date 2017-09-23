@@ -25,7 +25,8 @@ public class Categoria implements Serializable {
 	private String nome;
 	
 	@OneToMany
-	private Collection<Cupom> cupoms;
+	private Collection<Cupom> cupoms;	
+	
 
 	public Long getId() {
 		return id;

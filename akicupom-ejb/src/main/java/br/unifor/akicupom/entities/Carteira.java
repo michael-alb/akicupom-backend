@@ -1,12 +1,14 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +23,13 @@ public class Carteira implements Serializable {
 	
 	@Column
 	private int qtdCupons;
+	
+	/* Mapeamento Relacional */
+	
+	@OneToMany
+	private Collection<Cupom> cupoms;
+	
+	/* Getter e Setters */
 
 	public Long getId() {
 		return id;
@@ -36,6 +45,14 @@ public class Carteira implements Serializable {
 
 	public void setQtdCupons(int qtdCupons) {
 		this.qtdCupons = qtdCupons;
+	}
+
+	public Collection<Cupom> getCupoms() {
+		return cupoms;
+	}
+
+	public void setCupoms(Collection<Cupom> cupoms) {
+		this.cupoms = cupoms;
 	}
 
 	@Override
@@ -65,6 +82,6 @@ public class Carteira implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Carteira [id=" + id + ", qtdCupons=" + qtdCupons + "]";
-	}	
+		return "Carteira [id=" + id + ", qtdCupons=" + qtdCupons + ", cupoms=" + cupoms + "]";
+	}
 }

@@ -1,14 +1,15 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,22 +23,29 @@ public class Cupom implements Serializable {
 	private Long id;
 	
 	@Column(nullable=false)
-	private String nome;
+	private String titulo;
 	
 	@Column(nullable=false)
-	private Date dataValidade;
+	private String nome;	
+
+	@Column(name="data_validade", nullable=false)
+	private String dataValidade;
 	
-	@Column(nullable=false)
-	private String endereco;
+	@Column(name="data_geracao", nullable=false)
+	private String dataGeracao; 
 	
-	@ManyToOne
-	private Fornecedor fornecedor;
+	@Column(name="cod_cupom", nullable=false)
+	private String codigoCupom;
 	
-	@ManyToOne
-	private Categoria categoria;
+	/* Mapeamento Relacional */
 	
-	@ManyToOne
-	private Compra compra;
+	@OneToOne
+	private Promocao promocao;
+	
+	@OneToMany
+	private Collection<Usuario> usuarios;
+	
+	/* Getters e Setters */
 
 	public Long getId() {
 		return id;
@@ -45,6 +53,14 @@ public class Cupom implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public String getNome() {
@@ -55,44 +71,44 @@ public class Cupom implements Serializable {
 		this.nome = nome;
 	}
 
-	public Date getDataValidade() {
+	public String getDataValidade() {
 		return dataValidade;
 	}
 
-	public void setDataValidade(Date dataValidade) {
+	public void setDataValidade(String dataValidade) {
 		this.dataValidade = dataValidade;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public String getDataGeracao() {
+		return dataGeracao;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setDataGeracao(String dataGeracao) {
+		this.dataGeracao = dataGeracao;
 	}
 
-	public Fornecedor getFornecedor() {
-		return fornecedor;
+	public String getCodigoCupom() {
+		return codigoCupom;
 	}
 
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
+	public void setCodigoCupom(String codigoCupom) {
+		this.codigoCupom = codigoCupom;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
+	public Promocao getPromocao() {
+		return promocao;
 	}
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setPromocao(Promocao promocao) {
+		this.promocao = promocao;
 	}
 
-	public Compra getCompra() {
-		return compra;
+	public Collection<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
-	public void setCompra(Compra compra) {
-		this.compra = compra;
+	public void setUsuarios(Collection<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	@Override
@@ -122,7 +138,8 @@ public class Cupom implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cupom [id=" + id + ", nome=" + nome + ", dataValidade=" + dataValidade + ", endereco=" + endereco
-				+ ", fornecedor=" + fornecedor + ", categoria=" + categoria + ", compra=" + compra + "]";
+		return "Cupom [id=" + id + ", titulo=" + titulo + ", nome=" + nome + ", dataValidade=" + dataValidade
+				+ ", dataGeracao=" + dataGeracao + ", codigoCupom=" + codigoCupom + ", promocao=" + promocao
+				+ ", usuarios=" + usuarios + "]";
 	}
 }

@@ -29,13 +29,20 @@ public class Usuario implements Serializable {
 	@Column(nullable=false)
 	private String email;
 	
-	@OneToMany(mappedBy="usuario")
-	private Collection<Compra> compra;
+	@OneToMany
+	private Collection<Cupom> cupom;
+	
+	/* Mapeamento Relacional */
 	
 	@OneToOne
 	@JoinColumn
 	private Carteira carteira;
+	
+	@OneToMany
+	private Collection<Cupom> cupoms;
 
+	/* Getter e Setters */
+	
 	public Long getId() {
 		return id;
 	}
@@ -60,12 +67,12 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
-	public Collection<Compra> getCompra() {
-		return compra;
+	public Collection<Cupom> getCupom() {
+		return cupom;
 	}
 
-	public void setCompra(Collection<Compra> compra) {
-		this.compra = compra;
+	public void setCupom(Collection<Cupom> cupom) {
+		this.cupom = cupom;
 	}
 
 	public Carteira getCarteira() {
@@ -74,6 +81,14 @@ public class Usuario implements Serializable {
 
 	public void setCarteira(Carteira carteira) {
 		this.carteira = carteira;
+	}
+
+	public Collection<Cupom> getCupoms() {
+		return cupoms;
+	}
+
+	public void setCupoms(Collection<Cupom> cupoms) {
+		this.cupoms = cupoms;
 	}
 
 	@Override
@@ -103,7 +118,7 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", compra=" + compra + ", carteira="
-				+ carteira + "]";
-	}	
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", cupom=" + cupom + ", carteira="
+				+ carteira + ", cupoms=" + cupoms + "]";
+	}
 }
