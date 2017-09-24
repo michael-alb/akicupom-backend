@@ -30,7 +30,7 @@ public class Categoria implements Serializable {
 	@OneToMany
 	private Collection<Cupom> cupoms;
 	
-	@OneToOne
+	@OneToOne(mappedBy="categoria")
 	private Promocao promocoes;
 
 	public Long getId() {

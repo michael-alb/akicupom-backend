@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.unifor.akicupom.BO.PromocaoBO;
+import br.unifor.akicupom.entities.Categoria;
 import br.unifor.akicupom.entities.Promocao;
 
 
@@ -38,7 +39,7 @@ public class PromocaoResource {
 	/* Post em relacao a categoria esta errado */
 
 	@POST
-	@Path("/novo/{nome}/{descricao}/{valor_promocao}/{dataValidade}/{capa}/{status}")
+	@Path("/novo/{nome}/{descricao}/{valor_promocao}/{dataValidade}/{capa}/{status}/{categoria}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response novaPromocao(
 			@PathParam("nome") String nome,
@@ -46,7 +47,8 @@ public class PromocaoResource {
 			@PathParam("valor_promocao") Long valor_promocao,
 			@PathParam("dataValidade") String dataValidade,
 			@PathParam("capa") String capa,
-			@PathParam("status") boolean status){
+			@PathParam("status") boolean status,
+			@PathParam("categoria") String nomeCategoria){
 		Promocao promocao = new Promocao();
 		promocao.setNome(nome);
 		promocao.setDescricao(descricao);
@@ -54,6 +56,13 @@ public class PromocaoResource {
 		promocao.setDataValidade(dataValidade);
 		promocao.setCapa(capa);
 		promocao.setStatus(status);
+		Categoria categoria = new Categoria();
+		categoria.setNome(nomeCategoria);
+		promocao.setCategoria(categoria);
+		promocaoBO.inserirPromocao(promocao);
 		return Response.ok().build();	
 	}
+	
+	
+	
 }
