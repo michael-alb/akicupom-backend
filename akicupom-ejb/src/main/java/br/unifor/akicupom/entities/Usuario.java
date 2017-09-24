@@ -16,30 +16,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name="usuario")
 public class Usuario implements Serializable {
-	
+
 	private static final long serialVersionUID = 199979792830029774L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(nullable=false)
 	private String nome;
-	
+
 	@Column(nullable=false)
 	private String email;
-	
-	@OneToMany
-	private Collection<Cupom> cupom;
-	
+
 	/* Mapeamento Relacional */
-	
+
+	@OneToMany
+	private Collection<Cupom> cupoms;
+
 	@OneToOne
 	@JoinColumn
 	private Carteira carteira;
-	
-	@OneToMany
-	private Collection<Cupom> cupoms;
 
 	/* Getter e Setters */
 	
@@ -68,11 +65,11 @@ public class Usuario implements Serializable {
 	}
 
 	public Collection<Cupom> getCupom() {
-		return cupom;
+		return cupoms;
 	}
 
 	public void setCupom(Collection<Cupom> cupom) {
-		this.cupom = cupom;
+		this.cupoms = cupom;
 	}
 
 	public Carteira getCarteira() {
@@ -81,14 +78,6 @@ public class Usuario implements Serializable {
 
 	public void setCarteira(Carteira carteira) {
 		this.carteira = carteira;
-	}
-
-	public Collection<Cupom> getCupoms() {
-		return cupoms;
-	}
-
-	public void setCupoms(Collection<Cupom> cupoms) {
-		this.cupoms = cupoms;
 	}
 
 	@Override
@@ -118,7 +107,7 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", cupom=" + cupom + ", carteira="
-				+ carteira + ", cupoms=" + cupoms + "]";
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", cupom=" + cupoms + ", carteira="
+				+ carteira + "]";
 	}
 }

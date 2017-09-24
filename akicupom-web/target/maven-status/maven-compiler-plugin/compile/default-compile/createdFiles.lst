@@ -2,6 +2,7 @@ br/unifor/akicupom/rest/UsuarioResource.class
 br/unifor/akicupom/rest/MemberResourceRESTService.class
 br/unifor/akicupom/rest/CategoriaResource.class
 br/unifor/akicupom/controller/MemberController.class
+br/unifor/akicupom/rest/PromocaoResource.class
 br/unifor/akicupom/util/WebResources.class
 br/unifor/akicupom/rest/CarteiraResource.class
 br/unifor/akicupom/rest/RESTCorsRequestFilter.class

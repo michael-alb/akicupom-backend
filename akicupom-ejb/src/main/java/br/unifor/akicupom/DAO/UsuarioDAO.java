@@ -37,4 +37,12 @@ public class UsuarioDAO {
 		TypedQuery<Usuario> query = (TypedQuery<Usuario>) em.createNativeQuery(consulta);
 		return query.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Collection<Usuario> buscarTodosPorId(){
+		String consulta = "select nome from usuario";		
+		TypedQuery<Usuario> query = (TypedQuery<Usuario>) 
+				em.createNativeQuery(consulta);
+		return query.getResultList();
+	}
 }

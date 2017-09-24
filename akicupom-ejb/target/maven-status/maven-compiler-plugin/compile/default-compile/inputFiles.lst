@@ -1,5 +1,6 @@
 /home/adriano/git/akicupom-backend/akicupom-ejb/src/main/java/br/unifor/akicupom/data/MemberListProducer.java
 /home/adriano/git/akicupom-backend/akicupom-ejb/src/main/java/br/unifor/akicupom/entities/Categoria.java
+/home/adriano/git/akicupom-backend/akicupom-ejb/src/main/java/br/unifor/akicupom/DAO/PromocaoDAO.java
 /home/adriano/git/akicupom-backend/akicupom-ejb/src/main/java/br/unifor/akicupom/BO/CarteiraBO.java
 /home/adriano/git/akicupom-backend/akicupom-ejb/src/main/java/br/unifor/akicupom/entities/Carteira.java
 /home/adriano/git/akicupom-backend/akicupom-ejb/src/main/java/br/unifor/akicupom/data/MemberRepository.java
@@ -19,3 +20,4 @@
 /home/adriano/git/akicupom-backend/akicupom-ejb/src/main/java/br/unifor/akicupom/entities/Fornecedor.java
 /home/adriano/git/akicupom-backend/akicupom-ejb/src/main/java/br/unifor/akicupom/BO/UsuarioBO.java
 /home/adriano/git/akicupom-backend/akicupom-ejb/src/main/java/br/unifor/akicupom/service/MemberRegistration.java
+/home/adriano/git/akicupom-backend/akicupom-ejb/src/main/java/br/unifor/akicupom/BO/PromocaoBO.java

@@ -163,5 +163,5 @@ public class Promocao implements Serializable {
 		return "Promocao [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataValidade=" + dataValidade
 				+ ", valor_promocao=" + valor_promocao + ", capa=" + capa + ", status=" + status + ", cupoms=" + cupoms
 				+ ", categoria=" + categoria + ", fornecedor=" + fornecedor + "]";
-	}	
+	}
 }

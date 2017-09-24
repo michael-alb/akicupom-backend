@@ -4,5 +4,6 @@
 /home/adriano/git/akicupom-backend/akicupom-web/src/main/java/br/unifor/akicupom/controller/MemberController.java
 /home/adriano/git/akicupom-backend/akicupom-web/src/main/java/br/unifor/akicupom/rest/MemberResourceRESTService.java
 /home/adriano/git/akicupom-backend/akicupom-web/src/main/java/br/unifor/akicupom/rest/JaxRsActivator.java
+/home/adriano/git/akicupom-backend/akicupom-web/src/main/java/br/unifor/akicupom/rest/PromocaoResource.java
 /home/adriano/git/akicupom-backend/akicupom-web/src/main/java/br/unifor/akicupom/util/WebResources.java
 /home/adriano/git/akicupom-backend/akicupom-web/src/main/java/br/unifor/akicupom/rest/UsuarioResource.java

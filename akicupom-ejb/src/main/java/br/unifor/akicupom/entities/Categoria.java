@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,9 +25,13 @@ public class Categoria implements Serializable {
 	@Column(nullable=false)	
 	private String nome;
 	
-	@OneToMany
-	private Collection<Cupom> cupoms;	
+	/* Mapeamento Relacional */
 	
+	@OneToMany
+	private Collection<Cupom> cupoms;
+	
+	@OneToOne
+	private Promocao promocoes;
 
 	public Long getId() {
 		return id;
@@ -50,6 +55,16 @@ public class Categoria implements Serializable {
 
 	public void setCupoms(Collection<Cupom> cupoms) {
 		this.cupoms = cupoms;
+	}
+
+	
+
+	public Promocao getPromocoes() {
+		return promocoes;
+	}
+
+	public void setPromocoes(Promocao promocoes) {
+		this.promocoes = promocoes;
 	}
 
 	@Override
@@ -79,6 +94,6 @@ public class Categoria implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nome=" + nome + ", cupoms=" + cupoms + "]";
+		return "Categoria [id=" + id + ", nome=" + nome + ", cupoms=" + cupoms + ", promocoes=" + promocoes + "]";
 	}
 }

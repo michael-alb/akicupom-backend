@@ -34,4 +34,8 @@ public class UsuarioBO {
 	public Collection<Usuario> verTodosUsuarios(){
 		return usuarioDAO.buscarTodos();
 	}
+	
+	public Collection<Usuario> verTodosUsuariosId(){
+		return usuarioDAO.buscarTodosPorId();
+	}
 }

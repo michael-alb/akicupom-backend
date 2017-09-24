@@ -11,14 +11,12 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.unifor.akicupom.BO.UsuarioBO;
-import br.unifor.akicupom.entities.Carteira;
 import br.unifor.akicupom.entities.Usuario;
 
 @RequestScoped
@@ -49,6 +47,17 @@ public class UsuarioResource {
 		}
 		return Response.ok(usuario).build();
 	}	
+	
+	@GET
+	@Path("/listarPorNome")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response listarUsuariosID(){
+		Collection<Usuario> usuario = usuarioBO.verTodosUsuariosId();
+		if(usuario == null){
+			return Response.status(Status.NO_CONTENT).build();
+		}
+		return Response.ok(usuario).build();
+	}
 	
 	@POST
 	@Path("/novo/{nome}/{email}")
