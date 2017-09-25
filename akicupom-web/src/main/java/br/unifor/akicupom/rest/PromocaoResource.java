@@ -4,6 +4,7 @@ import java.util.Collection;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -15,7 +16,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.unifor.akicupom.BO.CategoriaBO;
 import br.unifor.akicupom.BO.PromocaoBO;
 import br.unifor.akicupom.entities.Categoria;
 import br.unifor.akicupom.entities.Promocao;
@@ -27,8 +27,6 @@ public class PromocaoResource {
 
 	@Inject
 	private PromocaoBO promocaoBO;
-	@Inject
-	private CategoriaBO categoriaBO;
 
 	@GET
 	@Path("/listar")
@@ -90,6 +88,8 @@ public class PromocaoResource {
 		return Response.ok().build();
 	}
 	
+	/* @PUT com consumes ainda não testado */
+	
 	@PUT
 	@Path("/atualizar/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -110,31 +110,14 @@ public class PromocaoResource {
 		return Response.ok().build();
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@DELETE
+	@Path("/remover/{id}")
+	public Response removerPromocao(@PathParam("id") Long id) {
+		Promocao promocao = promocaoBO.buscarPorId(id);
+		if(promocao == null) {
+			throw new WebApplicationException(Status.NOT_MODIFIED);
+		}
+		promocaoBO.removerPromocao(promocao);		
+		return Response.ok().build();
+	}	
 }
