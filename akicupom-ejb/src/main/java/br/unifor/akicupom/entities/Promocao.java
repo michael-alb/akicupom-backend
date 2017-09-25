@@ -48,7 +48,7 @@ public class Promocao implements Serializable {
 	private Collection<Cupom> cupoms;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="Promo_Cat")
+	@JoinColumn(name="promo_cat")
 	private Categoria categoria;
 	
 	@OneToOne
