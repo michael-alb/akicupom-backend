@@ -3,15 +3,19 @@ package br.unifor.akicupom.rest;
 import java.util.Collection;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import br.unifor.akicupom.BO.CategoriaBO;
 import br.unifor.akicupom.BO.PromocaoBO;
 import br.unifor.akicupom.entities.Categoria;
 import br.unifor.akicupom.entities.Promocao;
@@ -23,6 +27,8 @@ public class PromocaoResource {
 
 	@Inject
 	private PromocaoBO promocaoBO;
+	@Inject
+	private CategoriaBO categoriaBO;
 
 	@GET
 	@Path("/listar")
@@ -34,9 +40,6 @@ public class PromocaoResource {
 		}
 		return Response.ok(promocao).build();
 	}
-
-
-	/* Post em relacao a categoria esta errado */
 
 	@POST
 	@Path("/novo/{nome}/{descricao}/{valor_promocao}/{dataValidade}/{capa}/{status}/{categoria}")
@@ -62,6 +65,75 @@ public class PromocaoResource {
 		promocaoBO.inserirPromocao(promocao);
 		return Response.ok().build();	
 	}
+	
+	@PUT
+	@Path("/atualizar/{id}/{nome}/{descricao}/{valor_promocao}/{dataValidade}/{capa}/{status}/{categoria}")
+	public Response atualizarPromocao(@PathParam("id") Long id,
+			@PathParam("nome") String nome,
+			@PathParam("descricao") String descricao,
+			@PathParam("valor_promocao") Long valor_promocao,
+			@PathParam("dataValidade") String dataValidade,
+			@PathParam("capa") String capa,
+			@PathParam("status") boolean status,
+			@PathParam("categoria") String nomeCategoria){
+		Promocao promocaoExistente = promocaoBO.buscarPorId(id);
+		promocaoExistente.setNome(nome);
+		promocaoExistente.setDescricao(descricao);
+		promocaoExistente.setValor_promocao(valor_promocao);
+		promocaoExistente.setDataValidade(dataValidade);
+		promocaoExistente.setCapa(capa);
+		promocaoExistente.setStatus(status);
+		Categoria categoria = new Categoria();
+		categoria.setNome(nomeCategoria);
+		promocaoExistente.setCategoria(categoria);
+		promocaoBO.atualizarPromocao(promocaoExistente);
+		return Response.ok().build();
+	}
+	
+	@PUT
+	@Path("/atualizar/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response atualizarPromocao(@PathParam("id") Long id, 
+			Promocao promocao) {
+		Promocao promocaoExistente = promocaoBO.buscarPorId(id);
+		if(promocaoExistente == null) {
+			throw new WebApplicationException(Status.NOT_FOUND);
+		}
+		promocaoExistente.setNome(promocao.getNome());
+		promocaoExistente.setDescricao(promocao.getDescricao());
+		promocaoExistente.setValor_promocao(promocao.getValor_promocao());
+		promocaoExistente.setDataValidade(promocao.getDataValidade());
+		promocaoExistente.setCapa(promocao.getCapa());
+		promocaoExistente.setStatus(promocao.isStatus());
+		promocaoExistente.setCategoria(promocao.getCategoria());		
+		promocaoBO.atualizarPromocao(promocaoExistente);
+		return Response.ok().build();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -73,11 +74,12 @@ public class UsuarioResource {
 	}
 		
 	@PUT
-	@Path("/atualizar/{nome}/{email}")
+	@Path("/atualizar/{id}/{nome}/{email}")
 	public Response atualizarUsuario(
+			@PathParam("id") Long id,
 			@PathParam("nome") String nome,
 			@PathParam("email") String email){
-		Usuario usuario = new Usuario();
+		Usuario usuario = usuarioBO.buscarPorId(id);
 		usuario.setNome(nome);
 		usuario.setEmail(email);
 		usuarioBO.atualizarUsuario(usuario);
@@ -86,11 +88,12 @@ public class UsuarioResource {
 	
 	@PUT
 	@Path("/atualizar/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response atualizarUsuario(
 			@PathParam("id") Long id, Usuario usuario){
 		Usuario usuarioExistente = usuarioBO.buscarPorId(id);
 		if(usuarioExistente == null){
-			throw new WebApplicationException(Status.NOT_FOUND);
+			throw new WebApplicationException(Status.NOT_MODIFIED);
 		}
 		usuarioExistente.setNome(usuario.getNome());
 		usuarioExistente.setEmail(usuario.getEmail());
