@@ -15,6 +15,7 @@ public class CategoriaBO {
 	private CategoriaDAO categoriaDAO;
 	
 	public void inserirCategoria(Categoria categoria){
+		categoria.setNome("Restaurantes");
 		categoriaDAO.salvar(categoria);
 	}
 	
