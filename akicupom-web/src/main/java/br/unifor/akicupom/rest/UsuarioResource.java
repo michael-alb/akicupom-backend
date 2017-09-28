@@ -61,14 +61,16 @@ public class UsuarioResource {
 	}
 	
 	@POST
-	@Path("/novo/{nome}/{email}")
+	@Path("/novo/{nome}/{email}/{senha}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response novoUsuario(
 			@PathParam("nome") String nome, 
-			@PathParam("email") String email){
+			@PathParam("email") String email,
+			@PathParam("senha") String senha){
 		Usuario usuario = new Usuario();
 		usuario.setNome(nome);
 		usuario.setEmail(email);
+		usuario.setSenha(senha);
 		usuarioBO.inserirUsuario(usuario);
 		return Response.ok().build();
 	}

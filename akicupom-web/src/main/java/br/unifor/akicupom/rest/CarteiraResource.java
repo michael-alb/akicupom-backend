@@ -45,9 +45,8 @@ public class CarteiraResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response novaCarteira(
 			@PathParam("codigoCupom") String codigoCupom,
-			@PathParam("qtdCupons") int qtdCupons) {
+			@PathParam("qtdCupons") int qtdCupons, Cupom cupom) {
 		Carteira carteira = new Carteira();
-		Cupom cupom = new Cupom();
 		cupom.setCodigoCupom(codigoCupom);
 		carteira.setCupoms((Collection<Cupom>) cupom);
 		carteira.setQtdCupons(qtdCupons);

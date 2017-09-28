@@ -28,8 +28,11 @@ public class Usuario implements Serializable {
 
 	@Column(nullable=false)
 	private String email;
+	
+	@Column(nullable=false)
+	private String senha;	
 
-	/* Mapeamento Relacional */
+	/* Mapeamento Relacional */	
 
 	@OneToMany
 	private Collection<Cupom> cupoms;
@@ -64,12 +67,20 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
-	public Collection<Cupom> getCupom() {
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Collection<Cupom> getCupoms() {
 		return cupoms;
 	}
 
-	public void setCupom(Collection<Cupom> cupom) {
-		this.cupoms = cupom;
+	public void setCupoms(Collection<Cupom> cupoms) {
+		this.cupoms = cupoms;
 	}
 
 	public Carteira getCarteira() {
@@ -107,7 +118,7 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", cupom=" + cupoms + ", carteira="
-				+ carteira + "]";
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cupoms=" + cupoms
+				+ ", carteira=" + carteira + "]";
 	}
 }

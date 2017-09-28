@@ -88,7 +88,7 @@ public class PromocaoResource {
 		return Response.ok().build();
 	}
 	
-	/* @PUT com consumes ainda não testado */
+	/* @PUT com consumes ainda com problemas */
 	
 	@PUT
 	@Path("/atualizar/{id}")
