@@ -110,5 +110,5 @@ public class UsuarioResource {
 		}
 		usuarioBO.removerUsuario(usuarioExistente);
 		return Response.ok().build();
-	}	
+	}
 }

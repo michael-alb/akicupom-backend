@@ -45,7 +45,7 @@ public class CarteiraResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response novaCarteira(
 			@PathParam("codigoCupom") String codigoCupom,
-			@PathParam("qtdCupons") Integer qtdCupons) {
+			@PathParam("qtdCupons") int qtdCupons) {
 		Carteira carteira = new Carteira();
 		Cupom cupom = new Cupom();
 		cupom.setCodigoCupom(codigoCupom);
@@ -94,33 +94,4 @@ public class CarteiraResource {
 		carteiraBO.removerCarteira(carteira);
 		return Response.ok().build();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
