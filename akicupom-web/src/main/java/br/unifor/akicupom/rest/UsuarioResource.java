@@ -41,7 +41,7 @@ public class UsuarioResource {
 	@GET
 	@Path("/listar/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response listarUsuarios(@PathParam("id") Long id){
+	public Response listarUsuariosID(@PathParam("id") Long id){
 		Usuario usuario = usuarioBO.buscarPorId(id);
 		if(usuario == null){
 			return Response.status(Status.NO_CONTENT).build();
@@ -50,10 +50,10 @@ public class UsuarioResource {
 	}	
 	
 	@GET
-	@Path("/listarPorNome")
+	@Path("/listarPorNome/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response listarUsuariosID(){
-		Collection<Usuario> usuario = usuarioBO.verTodosUsuariosId();
+	public Response listarUsuariosNome(){
+		Collection<Usuario> usuario = usuarioBO.verTodosUsuariosNome();
 		if(usuario == null){
 			return Response.status(Status.NO_CONTENT).build();
 		}

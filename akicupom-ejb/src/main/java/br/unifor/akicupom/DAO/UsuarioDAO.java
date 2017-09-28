@@ -39,7 +39,7 @@ public class UsuarioDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Collection<Usuario> buscarTodosPorId(){
+	public Collection<Usuario> buscarTodosPorNome(){
 		String consulta = "select nome from usuario";		
 		TypedQuery<Usuario> query = (TypedQuery<Usuario>) 
 				em.createNativeQuery(consulta);
