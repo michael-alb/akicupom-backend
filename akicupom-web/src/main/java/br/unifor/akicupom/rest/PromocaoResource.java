@@ -30,7 +30,7 @@ public class PromocaoResource {
 
 	@GET
 	@Path("/listar")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json")
 	public Response listarPromocoes() {
 		Collection<Promocao> promocao = promocaoBO.verTodasPromocoes();
 		if(promocao == null || promocao.isEmpty()) {
