@@ -1,6 +1,6 @@
 br/unifor/akicupom/rest/UsuarioResource.class
-br/unifor/akicupom/rest/MemberResourceRESTService.class
 br/unifor/akicupom/rest/CupomResource.class
+br/unifor/akicupom/rest/MemberResourceRESTService.class
 br/unifor/akicupom/rest/CategoriaResource.class
 br/unifor/akicupom/controller/MemberController.class
 br/unifor/akicupom/rest/PromocaoResource.class
