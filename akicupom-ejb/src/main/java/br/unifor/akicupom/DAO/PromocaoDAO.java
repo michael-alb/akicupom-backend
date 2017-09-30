@@ -33,9 +33,11 @@ public class PromocaoDAO {
 	
 	@SuppressWarnings("unchecked")
 	public Collection<Promocao> buscarTodos(){
-		String consulta = "select * from promocao";		
-		TypedQuery<Promocao> query = 
-				(TypedQuery<Promocao>) em.createNativeQuery(consulta);
-		return query.getResultList();
+//		String consulta = "select * from promocao";		
+//		TypedQuery<Promocao> query = 
+//				(TypedQuery<Promocao>) em.createNativeQuery(consulta);
+//		return query.getResultList();
+		
+		return em.createQuery("SELECT p FROM Promocao p").getResultList();
 	}
 }

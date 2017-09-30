@@ -29,11 +29,11 @@ public class PromocaoResource {
 	private PromocaoBO promocaoBO;
 
 	@GET
-	@Path("/listar")
+	@Path("/lista")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response listarPromocoes() {
+	public Response  listarPromocoes() {
 		Collection<Promocao> promocao = promocaoBO.verTodasPromocoes();
-		if(promocao == null || promocao.isEmpty()) {
+		if(promocao == null) {
 			return Response.status(Status.NO_CONTENT).build();
 		}
 		return Response.ok(promocao).build();

@@ -44,8 +44,8 @@ public class Promocao implements Serializable {
 	
 	/* Mapeamento Relacional */
 
-	@OneToMany
-	private Collection<Cupom> cupoms;
+//	@OneToMany
+//	private Collection<Cupom> cupoms;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="promo_cat")
@@ -112,13 +112,13 @@ public class Promocao implements Serializable {
 		this.status = status;
 	}
 
-	public Collection<Cupom> getCupoms() {
-		return cupoms;
-	}
-
-	public void setCupoms(Collection<Cupom> cupoms) {
-		this.cupoms = cupoms;
-	}
+//	public Collection<Cupom> getCupoms() {
+//		return cupoms;
+//	}
+//
+//	public void setCupoms(Collection<Cupom> cupoms) {
+//		this.cupoms = cupoms;
+//	}
 
 	public Categoria getCategoria() {
 		return categoria;
@@ -164,7 +164,13 @@ public class Promocao implements Serializable {
 	@Override
 	public String toString() {
 		return "Promocao [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataValidade=" + dataValidade
-				+ ", valor_promocao=" + valor_promocao + ", capa=" + capa + ", status=" + status + ", cupoms=" + cupoms
-				+ ", categoria=" + categoria + ", fornecedor=" + fornecedor + "]";
+				+ ", valor_promocao=" + valor_promocao + ", capa=" + capa + ", status=" + status + ", categoria="
+				+ categoria + ", fornecedor=" + fornecedor + "]";
 	}
+
+	
+
+	
+
+	
 }

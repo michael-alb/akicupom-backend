@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -34,15 +35,13 @@ public class Usuario implements Serializable {
 
 	/* Mapeamento Relacional */	
 
-	@OneToMany
-	private Collection<Cupom> cupoms;
+	@ManyToOne
+	private Cupom cupom;
 
 	@OneToOne
 	@JoinColumn
 	private Carteira carteira;
 
-	/* Getter e Setters */
-	
 	public Long getId() {
 		return id;
 	}
@@ -75,12 +74,12 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	public Collection<Cupom> getCupoms() {
-		return cupoms;
+	public Cupom getCupoms() {
+		return cupom;
 	}
 
-	public void setCupoms(Collection<Cupom> cupoms) {
-		this.cupoms = cupoms;
+	public void setCupoms(Cupom cupoms) {
+		this.cupom = cupom;
 	}
 
 	public Carteira getCarteira() {
@@ -118,7 +117,7 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cupoms=" + cupoms
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cupom=" + cupom
 				+ ", carteira=" + carteira + "]";
 	}
 }
