@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -43,7 +44,10 @@ public class Promocao implements Serializable {
 	@OneToOne
 	private Categoria categoria;
 	
-	/* Getter e Setters */
+	@ManyToOne
+	private Fornecedor fornecedor;
+	
+	/* Getters e Setters */
 
 	public Long getId() {
 		return id;
@@ -109,6 +113,14 @@ public class Promocao implements Serializable {
 		this.categoria = categoria;
 	}
 
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -138,6 +150,6 @@ public class Promocao implements Serializable {
 	public String toString() {
 		return "Promocao [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataValidade=" + dataValidade
 				+ ", valor_promocao=" + valor_promocao + ", capa=" + capa + ", status=" + status + ", categoria="
-				+ categoria + "]";
+				+ categoria + ", fornecedor=" + fornecedor + "]";
 	}
 }

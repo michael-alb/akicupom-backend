@@ -1,17 +1,14 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.br.CNPJ;
 
 @Entity
 @Table(name="fornecedor")
@@ -26,7 +23,7 @@ public class Fornecedor implements Serializable {
 	@Column(nullable=false)
 	private String nome;
 	
-	@CNPJ
+	@Column
 	private String cnpj;
 	
 	@Column(nullable=false)
@@ -35,11 +32,6 @@ public class Fornecedor implements Serializable {
 	@Column(nullable=false)
 	private String telefone;
 	
-	/* Mapeamento Relacional */
-	
-	@OneToMany
-	private List<Promocao> promocao;
-
 	/* Getters e Setters */
 	
 	public Long getId() {
@@ -82,14 +74,6 @@ public class Fornecedor implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public List<Promocao> getPromocao() {
-		return promocao;
-	}
-
-	public void setPromocao(List<Promocao> promocao) {
-		this.promocao = promocao;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -118,6 +102,6 @@ public class Fornecedor implements Serializable {
 	@Override
 	public String toString() {
 		return "Fornecedor [id=" + id + ", nome=" + nome + ", cnpj=" + cnpj + ", endereco=" + endereco + ", telefone="
-				+ telefone + ", promocao=" + promocao + "]";
+				+ telefone + "]";
 	}
 }

@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response.Status;
 
 import br.unifor.akicupom.BO.PromocaoBO;
 import br.unifor.akicupom.entities.Categoria;
+import br.unifor.akicupom.entities.Fornecedor;
 import br.unifor.akicupom.entities.Promocao;
 
 
@@ -40,7 +41,7 @@ public class PromocaoResource {
 	}
 
 	@POST
-	@Path("/novo/{nome}/{descricao}/{valor_promocao}/{dataValidade}/{capa}/{status}/{categoria}")
+	@Path("/novo/{nome}/{descricao}/{valor_promocao}/{dataValidade}/{capa}/{status}/{categoria}/{fornecedor}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response novaPromocao(
 			@PathParam("nome") String nome,
@@ -49,7 +50,8 @@ public class PromocaoResource {
 			@PathParam("dataValidade") String dataValidade,
 			@PathParam("capa") String capa,
 			@PathParam("status") boolean status,
-			@PathParam("categoria") String nomeCategoria){
+			@PathParam("categoria") Long idCategoria,
+			@PathParam("fornecedor") Long idFornecedor){
 		Promocao promocao = new Promocao();
 		promocao.setNome(nome);
 		promocao.setDescricao(descricao);
@@ -58,14 +60,17 @@ public class PromocaoResource {
 		promocao.setCapa(capa);
 		promocao.setStatus(status);
 		Categoria categoria = new Categoria();
-		categoria.setNome(nomeCategoria);
+		categoria.setId(idCategoria);
 		promocao.setCategoria(categoria);
+		Fornecedor fornecedor = new Fornecedor();
+		fornecedor.setId(idFornecedor);
+		promocao.setFornecedor(fornecedor);
 		promocaoBO.inserirPromocao(promocao);
 		return Response.ok().build();	
 	}
 	
 	@PUT
-	@Path("/atualizar/{id}/{nome}/{descricao}/{valor_promocao}/{dataValidade}/{capa}/{status}/{categoria}")
+	@Path("/atualizar/{id}/{nome}/{descricao}/{valor_promocao}/{dataValidade}/{capa}/{status}/{categoria}/{fornecedor}")
 	public Response atualizarPromocao(@PathParam("id") Long id,
 			@PathParam("nome") String nome,
 			@PathParam("descricao") String descricao,
@@ -73,7 +78,8 @@ public class PromocaoResource {
 			@PathParam("dataValidade") String dataValidade,
 			@PathParam("capa") String capa,
 			@PathParam("status") boolean status,
-			@PathParam("categoria") String nomeCategoria){
+			@PathParam("categoria") String nomeCategoria,
+			@PathParam("fornecedor") Long idFornecedor){
 		Promocao promocaoExistente = promocaoBO.buscarPorId(id);
 		promocaoExistente.setNome(nome);
 		promocaoExistente.setDescricao(descricao);
@@ -83,6 +89,9 @@ public class PromocaoResource {
 		promocaoExistente.setStatus(status);
 		Categoria categoria = new Categoria();
 		categoria.setNome(nomeCategoria);
+		Fornecedor fornecedor = new Fornecedor();
+		fornecedor.setId(idFornecedor);
+		promocaoExistente.setFornecedor(fornecedor);
 		promocaoExistente.setCategoria(categoria);
 		promocaoBO.atualizarPromocao(promocaoExistente);
 		return Response.ok().build();

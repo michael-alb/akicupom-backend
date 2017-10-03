@@ -1,5 +1,6 @@
 package br.unifor.akicupom.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -37,21 +38,20 @@ public class CarteiraResource {
 			return Response.status(Status.NO_CONTENT).build();
 		}
 		return Response.ok(carteira, MediaType.APPLICATION_JSON).build();
-	}
-	
+	}	
 	
 	@POST
 	@Path("/novo/{id}/{qtdCupons}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@SuppressWarnings("unchecked")
 	public Response novaCarteira(
 			@PathParam("id") Long id,
 			@PathParam("qtdCupons") int qtdCupons) {
-		Carteira carteira = new Carteira();
-		Cupom cupom = new Cupom();
+		Cupom cupom = new Cupom();		
 		cupom.setId(id);
-		carteira.setCupoms((List<Cupom>) cupom);
-		carteira.setQtdCupons(qtdCupons);
+		List<Cupom> cupomLista = new ArrayList<Cupom>();
+		cupomLista.add(cupom);
+		Carteira carteira = new Carteira();
+		carteira.setCupoms(cupomLista);
 		carteiraBO.inserirCarteira(carteira);
 		return Response.ok().build();		
 	}
