@@ -31,7 +31,7 @@ public class FornecedorBO {
 		return fornecedorDAO.buscarPorId(id);
 	}
 	
-	public Collection<Fornecedor> verTodosUsuarios(){
+	public Collection<Fornecedor> verTodosFornecedor(){
 		return fornecedorDAO.buscarTodos();
 	}
 }
