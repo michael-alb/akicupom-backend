@@ -1,6 +1,6 @@
 package br.unifor.akicupom.rest;
 
-import java.util.Collection;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -29,11 +29,11 @@ public class PromocaoResource {
 	private PromocaoBO promocaoBO;
 
 	@GET
-	@Path("/lista")
+	@Path("/listar")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response  listarPromocoes() {
-		Collection<Promocao> promocao = promocaoBO.verTodasPromocoes();
-		if(promocao == null) {
+	public Response listarPromocoes() {
+		List<Promocao> promocao = promocaoBO.verTodasPromocoes();
+		if(promocao == null || promocao.isEmpty()) {
 			return Response.status(Status.NO_CONTENT).build();
 		}
 		return Response.ok(promocao).build();

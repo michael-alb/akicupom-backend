@@ -3,8 +3,8 @@ br/unifor/akicupom/DAO/CupomDAO.class
 br/unifor/akicupom/BO/CupomBO.class
 br/unifor/akicupom/BO/FornecedorBO.class
 br/unifor/akicupom/entities/Carteira.class
-br/unifor/akicupom/util/Resources.class
 br/unifor/akicupom/BO/CarteiraBO.class
+br/unifor/akicupom/util/Resources.class
 br/unifor/akicupom/entities/Fornecedor.class
 br/unifor/akicupom/BO/UsuarioBO.class
 br/unifor/akicupom/model/Member.class

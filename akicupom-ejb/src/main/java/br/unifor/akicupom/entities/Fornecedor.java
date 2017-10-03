@@ -1,7 +1,7 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,11 +37,11 @@ public class Fornecedor implements Serializable {
 	
 	/* Mapeamento Relacional */
 	
-	@OneToMany(mappedBy="fornecedor")
-	private Collection<Promocao> promocao;
-	
-	/* Getters e Setters */
+	@OneToMany
+	private List<Promocao> promocao;
 
+	/* Getters e Setters */
+	
 	public Long getId() {
 		return id;
 	}
@@ -82,11 +82,11 @@ public class Fornecedor implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public Collection<Promocao> getPromocao() {
+	public List<Promocao> getPromocao() {
 		return promocao;
 	}
 
-	public void setPromocao(Collection<Promocao> promocao) {
+	public void setPromocao(List<Promocao> promocao) {
 		this.promocao = promocao;
 	}
 
@@ -119,5 +119,5 @@ public class Fornecedor implements Serializable {
 	public String toString() {
 		return "Fornecedor [id=" + id + ", nome=" + nome + ", cnpj=" + cnpj + ", endereco=" + endereco + ", telefone="
 				+ telefone + ", promocao=" + promocao + "]";
-	}	
+	}
 }

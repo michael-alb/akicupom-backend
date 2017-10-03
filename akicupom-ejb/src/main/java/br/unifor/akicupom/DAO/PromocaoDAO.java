@@ -1,6 +1,6 @@
 package br.unifor.akicupom.DAO;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,12 +32,10 @@ public class PromocaoDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Collection<Promocao> buscarTodos(){
-//		String consulta = "select * from promocao";		
-//		TypedQuery<Promocao> query = 
-//				(TypedQuery<Promocao>) em.createNativeQuery(consulta);
-//		return query.getResultList();
-		
-		return em.createQuery("SELECT p FROM Promocao p").getResultList();
+	public List<Promocao> buscarTodos(){
+		String consulta = "select p from Promocao p";		
+		TypedQuery<Promocao> query = 
+				(TypedQuery<Promocao>) em.createQuery(consulta);
+		return query.getResultList();
 	}
 }

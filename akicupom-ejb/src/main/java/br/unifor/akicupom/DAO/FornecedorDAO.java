@@ -1,6 +1,6 @@
 package br.unifor.akicupom.DAO;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,9 +32,9 @@ public class FornecedorDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Collection<Fornecedor> buscarTodos(){
-		String consulta = "select * from fornecedor";
-		TypedQuery<Fornecedor> query = (TypedQuery<Fornecedor>) em.createNativeQuery(consulta);
+	public List<Fornecedor> buscarTodos(){
+		String consulta = "select f from Fornecedor f";
+		TypedQuery<Fornecedor> query = (TypedQuery<Fornecedor>) em.createQuery(consulta);
 		return query.getResultList();
 	}
 }

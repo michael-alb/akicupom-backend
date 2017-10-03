@@ -1,6 +1,6 @@
 package br.unifor.akicupom.rest;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -31,10 +31,11 @@ public class UsuarioResource {
 	@Path("/listar")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listarUsuarios(){
-		Collection<Usuario> usuario = usuarioBO.verTodosUsuarios();
+		List<Usuario> usuario = usuarioBO.verTodosUsuarios();
 		if(usuario == null || usuario.isEmpty()){
 			return Response.status(Status.NO_CONTENT).build();
 		}
+		usuario.sort((Usuario o1, Usuario o2) -> o1.getNome().compareTo(o2.getNome()));
 		return Response.ok(usuario).build();
 	}
 	
@@ -51,13 +52,13 @@ public class UsuarioResource {
 	
 	@GET
 	@Path("/listarPorNome/")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json")
 	public Response listarUsuariosNome(){
-		Collection<Usuario> usuario = usuarioBO.verTodosUsuariosNome();
+		List<Usuario> usuario = usuarioBO.verTodosUsuariosNome();
 		if(usuario == null){
 			return Response.status(Status.NO_CONTENT).build();
 		}
-		return Response.ok(usuario).build();
+		return Response.ok(usuario, MediaType.APPLICATION_JSON).build();
 	}
 	
 	@POST
@@ -76,14 +77,16 @@ public class UsuarioResource {
 	}
 		
 	@PUT
-	@Path("/atualizar/{id}/{nome}/{email}")
+	@Path("/atualizar/{id}/{nome}/{email}/{senha}")
 	public Response atualizarUsuario(
 			@PathParam("id") Long id,
 			@PathParam("nome") String nome,
-			@PathParam("email") String email){
+			@PathParam("email") String email,
+			@PathParam("senha") String senha){
 		Usuario usuario = usuarioBO.buscarPorId(id);
 		usuario.setNome(nome);
 		usuario.setEmail(email);
+		usuario.setSenha(senha);
 		usuarioBO.atualizarUsuario(usuario);
 		return Response.ok().build();
 	}
@@ -99,6 +102,7 @@ public class UsuarioResource {
 		}
 		usuarioExistente.setNome(usuario.getNome());
 		usuarioExistente.setEmail(usuario.getEmail());
+		usuarioExistente.setSenha(usuario.getSenha());
 		usuarioBO.atualizarUsuario(usuarioExistente);
 		return Response.ok().build();
 	}

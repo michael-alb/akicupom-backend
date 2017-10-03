@@ -1,6 +1,6 @@
 package br.unifor.akicupom.DAO;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,10 +32,10 @@ public class CupomDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Collection<Cupom> buscarTodos(){
-		String consulta = "select * from cupom";
+	public List<Cupom> buscarTodos(){
+		String consulta = "select c from Cupom c";
 		TypedQuery<Cupom> query = (TypedQuery<Cupom>) 
-		em.createNativeQuery(consulta);
+		em.createQuery(consulta);
 		return query.getResultList();		
 	}	
 }

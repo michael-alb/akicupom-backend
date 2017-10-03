@@ -1,6 +1,6 @@
 package br.unifor.akicupom.BO;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -32,7 +32,7 @@ public class CategoriaBO {
 		return categoriaDAO.buscarPorId(id);
 	}
 	
-	public Collection<Categoria> verTodasCategorias(){
+	public List<Categoria> verTodasCategorias(){
 		return categoriaDAO.buscarTodos();
 	}
 }

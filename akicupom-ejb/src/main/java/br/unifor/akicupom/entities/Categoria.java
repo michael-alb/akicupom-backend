@@ -1,14 +1,12 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,14 +23,13 @@ public class Categoria implements Serializable {
 	@Column(nullable=false)	
 	private String nome;
 	
-	/* Mapeamento Relacional */
+	/* Mapeamento Relacional */	
 	
-	@OneToMany
-	private Collection<Cupom> cupoms;
-	
-	@OneToOne(mappedBy="categoria")
+	@OneToOne
 	private Promocao promocoes;
 
+	/* Getter e Setters */
+	
 	public Long getId() {
 		return id;
 	}
@@ -48,16 +45,6 @@ public class Categoria implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public Collection<Cupom> getCupoms() {
-		return cupoms;
-	}
-
-	public void setCupoms(Collection<Cupom> cupoms) {
-		this.cupoms = cupoms;
-	}
-
-	
 
 	public Promocao getPromocoes() {
 		return promocoes;
@@ -94,6 +81,6 @@ public class Categoria implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nome=" + nome + ", cupoms=" + cupoms + ", promocoes=" + promocoes + "]";
+		return "Categoria [id=" + id + ", nome=" + nome + ", promocoes=" + promocoes + "]";
 	}
 }

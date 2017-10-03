@@ -1,6 +1,6 @@
 package br.unifor.akicupom.rest;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -32,23 +32,25 @@ public class CarteiraResource {
 	@Path("/listar")
 	@Produces("aplication/json")
 	public Response listarCarteiras(){
-		Collection<Carteira> carteira = carteiraBO.verTodasCarteiras();
+		List<Carteira> carteira = carteiraBO.verTodasCarteiras();
 		if(carteira == null || carteira.isEmpty()){
 			return Response.status(Status.NO_CONTENT).build();
 		}
 		return Response.ok(carteira, MediaType.APPLICATION_JSON).build();
 	}
 	
-	@SuppressWarnings("unchecked")
+	
 	@POST
-	@Path("/novo/{codigoCupom}/{qtdCupons}")
+	@Path("/novo/{id}/{qtdCupons}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@SuppressWarnings("unchecked")
 	public Response novaCarteira(
-			@PathParam("codigoCupom") String codigoCupom,
-			@PathParam("qtdCupons") int qtdCupons, Cupom cupom) {
+			@PathParam("id") Long id,
+			@PathParam("qtdCupons") int qtdCupons) {
 		Carteira carteira = new Carteira();
-		cupom.setCodigoCupom(codigoCupom);
-		carteira.setCupoms((Collection<Cupom>) cupom);
+		Cupom cupom = new Cupom();
+		cupom.setId(id);
+		carteira.setCupoms((List<Cupom>) cupom);
 		carteira.setQtdCupons(qtdCupons);
 		carteiraBO.inserirCarteira(carteira);
 		return Response.ok().build();		
@@ -64,7 +66,7 @@ public class CarteiraResource {
 		Carteira carteira = carteiraBO.buscarPorId(id);
 		Cupom cupom = new Cupom();
 		cupom.setCodigoCupom(codigoCupom);
-		carteira.setCupoms((Collection<Cupom>) cupom);
+		carteira.setCupoms((List<Cupom>) cupom);
 		carteira.setQtdCupons(qtdCupons);
 		return Response.ok().build();
 	}

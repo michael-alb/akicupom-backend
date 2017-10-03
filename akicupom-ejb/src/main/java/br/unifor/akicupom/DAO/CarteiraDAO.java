@@ -1,6 +1,6 @@
 package br.unifor.akicupom.DAO;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,9 +32,9 @@ public class CarteiraDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Collection<Carteira> buscarTodos(){
-		String consulta = "select * from carteira";
-		TypedQuery<Carteira> query = (TypedQuery<Carteira>) em.createNativeQuery(consulta);
+	public List<Carteira> buscarTodos(){
+		String consulta = "select c from Carteira c";
+		TypedQuery<Carteira> query = (TypedQuery<Carteira>) em.createQuery(consulta);
 		return query.getResultList();
 	}
 }

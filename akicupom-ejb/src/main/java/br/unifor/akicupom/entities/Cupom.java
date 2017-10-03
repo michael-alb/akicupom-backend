@@ -1,7 +1,6 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -40,14 +38,13 @@ public class Cupom implements Serializable {
 	
 	/* Mapeamento Relacional */
 	
-	@ManyToOne
+	@OneToOne
 	private Promocao promocao;
 	
-	@OneToMany
-	private Collection<Usuario> usuario;
-	
 	@ManyToOne
-	private Categoria categoria;
+	private Usuario usuario;
+	
+	/* Getter e Setters */
 
 	public Long getId() {
 		return id;
@@ -105,20 +102,12 @@ public class Cupom implements Serializable {
 		this.promocao = promocao;
 	}
 
-	public Collection<Usuario> getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Collection<Usuario> usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
 	}
 
 	@Override
@@ -150,10 +139,6 @@ public class Cupom implements Serializable {
 	public String toString() {
 		return "Cupom [id=" + id + ", titulo=" + titulo + ", nome=" + nome + ", dataValidade=" + dataValidade
 				+ ", dataGeracao=" + dataGeracao + ", codigoCupom=" + codigoCupom + ", promocao=" + promocao
-				+ ", usuario=" + usuario + ", categoria=" + categoria + "]";
+				+ ", usuario=" + usuario + "]";
 	}
-
-
-
-	
 }
