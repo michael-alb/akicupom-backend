@@ -5,11 +5,9 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -31,57 +29,39 @@ public class CarteiraResource {
 	
 	@GET
 	@Path("/listar")
-	@Produces("aplication/json")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response listarCarteiras(){
 		List<Carteira> carteira = carteiraBO.verTodasCarteiras();
 		if(carteira == null || carteira.isEmpty()){
 			return Response.status(Status.NO_CONTENT).build();
 		}
-		return Response.ok(carteira, MediaType.APPLICATION_JSON).build();
+		return Response.ok(carteira).build();
 	}	
 	
-	@POST
-	@Path("/novo/{id}/{qtdCupons}")
+	@GET
+	@Path("/listar/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response novaCarteira(
-			@PathParam("id") Long id,
-			@PathParam("qtdCupons") int qtdCupons) {
-		Cupom cupom = new Cupom();		
-		cupom.setId(id);
-		List<Cupom> cupomLista = new ArrayList<Cupom>();
-		cupomLista.add(cupom);
-		Carteira carteira = new Carteira();
-		carteira.setCupoms(cupomLista);
-		carteiraBO.inserirCarteira(carteira);
-		return Response.ok().build();		
-	}
-	
-	@SuppressWarnings("unchecked")
-	@PUT
-	@Path("/atualizar/{id}/{codigoCupom}/{qtdCupons}")
-	public Response atualizarCarteira(
-			@PathParam("id") Long id,
-			@PathParam("codigoCupom") String codigoCupom,
-			@PathParam("qtdCupons") int qtdCupons) {
+	public Response listarCarteiras(@PathParam("id") Long id){
 		Carteira carteira = carteiraBO.buscarPorId(id);
-		Cupom cupom = new Cupom();
-		cupom.setCodigoCupom(codigoCupom);
-		carteira.setCupoms((List<Cupom>) cupom);
-		carteira.setQtdCupons(qtdCupons);
-		return Response.ok().build();
+		if(carteira == null){
+			return Response.status(Status.NO_CONTENT).build();
+		}
+		return Response.ok(carteira).build();
 	}
 	
-	@PUT
-	@Path("/atualizar/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response atualizarCarteira(
-			@PathParam("id") Long id, Carteira carteira){
-		Carteira carteiraExistente = carteiraBO.buscarPorId(id);
-		if(carteiraExistente == null) {
-			throw new WebApplicationException(Status.NOT_MODIFIED);
-		}
-		carteiraExistente.setCupoms(carteira.getCupoms());
-		carteiraExistente.setQtdCupons(carteira.getQtdCupons());
+	@POST
+	@Path("novo/{idCupom}/{qtdCupons}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response novoCarteira(
+			@PathParam("idCupom") Long id,
+			@PathParam("qtdCupons") int qtdCupons) {
+		Cupom cupom = new Cupom();
+		cupom.setId(id);
+		ArrayList<Cupom> cupomList = new ArrayList<Cupom>();
+		cupomList.add(cupom);
+		Carteira carteira = new Carteira();
+		carteira.setCupoms(cupomList);
+		carteiraBO.inserirCarteira(carteira);
 		return Response.ok().build();
 	}
 	

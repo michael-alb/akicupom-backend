@@ -20,17 +20,17 @@ public class Carteira implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column
 	private int qtdCupons;
-	
+
 	/* Mapeamento Relacional */
-	
+
 	@OneToMany
 	private List<Cupom> cupoms;
-
-	/* Getter e Setters */
 	
+	/* Getter e Setters */
+
 	public Long getId() {
 		return id;
 	}

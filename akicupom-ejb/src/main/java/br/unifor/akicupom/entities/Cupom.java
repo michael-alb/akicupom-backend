@@ -44,8 +44,11 @@ public class Cupom implements Serializable {
 	@ManyToOne
 	private Usuario usuario;
 	
-	/* Getter e Setters */
+	@ManyToOne
+	private Carteira carteira;
 
+	/* Getters e Setters */
+	
 	public Long getId() {
 		return id;
 	}
@@ -110,6 +113,14 @@ public class Cupom implements Serializable {
 		this.usuario = usuario;
 	}
 
+	public Carteira getCarteira() {
+		return carteira;
+	}
+
+	public void setCarteira(Carteira carteira) {
+		this.carteira = carteira;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -139,6 +150,6 @@ public class Cupom implements Serializable {
 	public String toString() {
 		return "Cupom [id=" + id + ", titulo=" + titulo + ", nome=" + nome + ", dataValidade=" + dataValidade
 				+ ", dataGeracao=" + dataGeracao + ", codigoCupom=" + codigoCupom + ", promocao=" + promocao
-				+ ", usuario=" + usuario + "]";
+				+ ", usuario=" + usuario + ", carteira=" + carteira + "]";
 	}
 }
