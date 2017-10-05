@@ -39,6 +39,9 @@ public class Promocao implements Serializable {
 	@Column
 	private boolean status;
 	
+	@Column(name="promo_cat")
+	private String promoCategoria;
+	
 	/* Mapeamento Relacional */
 
 	@OneToOne
@@ -105,6 +108,14 @@ public class Promocao implements Serializable {
 		this.status = status;
 	}
 
+	public String getPromoCategoria() {
+		return promoCategoria;
+	}
+
+	public void setPromoCategoria(String promoCategoria) {
+		this.promoCategoria = promoCategoria;
+	}
+
 	public Categoria getCategoria() {
 		return categoria;
 	}
@@ -149,7 +160,7 @@ public class Promocao implements Serializable {
 	@Override
 	public String toString() {
 		return "Promocao [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataValidade=" + dataValidade
-				+ ", valor_promocao=" + valor_promocao + ", capa=" + capa + ", status=" + status + ", categoria="
-				+ categoria + ", fornecedor=" + fornecedor + "]";
+				+ ", valor_promocao=" + valor_promocao + ", capa=" + capa + ", status=" + status + ", promoCategoria="
+				+ promoCategoria + ", categoria=" + categoria + ", fornecedor=" + fornecedor + "]";
 	}
 }
