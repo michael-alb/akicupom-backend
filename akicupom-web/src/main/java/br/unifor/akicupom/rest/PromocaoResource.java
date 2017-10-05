@@ -50,8 +50,8 @@ public class PromocaoResource {
 			@PathParam("dataValidade") String dataValidade,
 			@PathParam("capa") String capa,
 			@PathParam("status") boolean status,
-			@PathParam("categoria") Long idCategoria,
-			@PathParam("fornecedor") Long idFornecedor){
+			@PathParam("categoria") String NomeCategoria,
+			@PathParam("fornecedor") String NomeFornecedor){
 		Promocao promocao = new Promocao();
 		promocao.setNome(nome);
 		promocao.setDescricao(descricao);
@@ -60,10 +60,10 @@ public class PromocaoResource {
 		promocao.setCapa(capa);
 		promocao.setStatus(status);
 		Categoria categoria = new Categoria();
-		categoria.setId(idCategoria);
+		categoria.setNome(NomeCategoria);
 		promocao.setCategoria(categoria);
 		Fornecedor fornecedor = new Fornecedor();
-		fornecedor.setId(idFornecedor);
+		fornecedor.setNome(NomeFornecedor);
 		promocao.setFornecedor(fornecedor);
 		promocaoBO.inserirPromocao(promocao);
 		return Response.ok().build();	
