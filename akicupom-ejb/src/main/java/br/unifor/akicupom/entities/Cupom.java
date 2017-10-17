@@ -10,8 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="cupom")
 public class Cupom implements Serializable {
 
@@ -46,9 +48,9 @@ public class Cupom implements Serializable {
 	
 	@ManyToOne
 	private Carteira carteira;
-
-	/* Getters e Setters */
 	
+	/* Getters e Setters */	
+
 	public Long getId() {
 		return id;
 	}

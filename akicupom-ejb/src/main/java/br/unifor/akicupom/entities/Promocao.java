@@ -7,11 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="promocao")
 public class Promocao implements Serializable {
 
@@ -33,21 +34,21 @@ public class Promocao implements Serializable {
 	@Column
 	private Long valor_promocao;
 
-	@Column(nullable=false)
+	@Column
 	private String capa;
 	
 	@Column
 	private boolean status;
-	
-	@Column(name="promo_cat")
-	private String promoCategoria;
 	
 	/* Mapeamento Relacional */
 
 	@OneToOne
 	private Categoria categoria;
 	
-	@ManyToOne
+	@OneToOne(mappedBy="promocao")
+	private Cupom cupom;
+	
+	@OneToOne
 	private Fornecedor fornecedor;
 	
 	/* Getters e Setters */
@@ -108,20 +109,20 @@ public class Promocao implements Serializable {
 		this.status = status;
 	}
 
-	public String getPromoCategoria() {
-		return promoCategoria;
-	}
-
-	public void setPromoCategoria(String promoCategoria) {
-		this.promoCategoria = promoCategoria;
-	}
-
 	public Categoria getCategoria() {
 		return categoria;
 	}
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}	
+
+	public Cupom getCupom() {
+		return cupom;
+	}
+
+	public void setCupom(Cupom cupom) {
+		this.cupom = cupom;
 	}
 
 	public Fornecedor getFornecedor() {
@@ -160,7 +161,7 @@ public class Promocao implements Serializable {
 	@Override
 	public String toString() {
 		return "Promocao [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataValidade=" + dataValidade
-				+ ", valor_promocao=" + valor_promocao + ", capa=" + capa + ", status=" + status + ", promoCategoria="
-				+ promoCategoria + ", categoria=" + categoria + ", fornecedor=" + fornecedor + "]";
+				+ ", valor_promocao=" + valor_promocao + ", capa=" + capa + ", status=" + status + ", categoria="
+				+ categoria + ", cupom=" + cupom + ", fornecedor=" + fornecedor + "]";
 	}
 }

@@ -38,15 +38,17 @@ public class FornecedorResource{
 	}
 	
 	@POST
-	@Path("/novo/{nome}/{cnpj}/{endereco}/{telefone}")
+	@Path("/novo/{nome}/{senha}/{cnpj}/{endereco}/{telefone}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response novoFornecedor(
 			@PathParam("nome") String nome,
+			@PathParam("senha") String senha,
 			@PathParam("cnpj") String cnpj,
 			@PathParam("endereco") String endereco,
 			@PathParam("telefone") String telefone) {
 		Fornecedor fornecedor = new Fornecedor();
-		fornecedor.setNome(nome);
+		fornecedor.setNome(nome);		
+		fornecedor.setSenha(senha);
 		fornecedor.setCnpj(cnpj);
 		fornecedor.setTelefone(telefone);
 		fornecedor.setEndereco(endereco);
@@ -55,15 +57,17 @@ public class FornecedorResource{
 	}
 	
 	@PUT
-	@Path("/atualizar/{id}/{nome}/{cnpj}/{endereco}/{telefone}")
+	@Path("/atualizar/{id}/{nome}/{senha}/{cnpj}/{endereco}/{telefone}")
 	public Response atualizarFornecedor(
 			@PathParam("id") Long id,
 			@PathParam("nome") String nome,
+			@PathParam("senha") String senha,
 			@PathParam("cnpj") String cnpj,
 			@PathParam("endereco") String endereco,
 			@PathParam("telefone") String telefone) {
 		Fornecedor fornecedor = fornecedorBO.buscarPorId(id);
 		fornecedor.setNome(nome);
+		fornecedor.setSenha(senha);
 		fornecedor.setCnpj(cnpj);
 		fornecedor.setEndereco(endereco);
 		fornecedor.setTelefone(telefone);

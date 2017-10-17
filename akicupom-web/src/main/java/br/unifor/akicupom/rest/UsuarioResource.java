@@ -1,5 +1,6 @@
 package br.unifor.akicupom.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -18,6 +19,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.unifor.akicupom.BO.UsuarioBO;
+import br.unifor.akicupom.entities.Cupom;
 import br.unifor.akicupom.entities.Usuario;
 
 @RequestScoped
@@ -62,17 +64,38 @@ public class UsuarioResource {
 	}
 	
 	@POST
-	@Path("/novo/{nome}/{email}/{senha}")
+	@Path("/novo/{nome}/{email}/{senha}/{idCupom}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response novoUsuario(
 			@PathParam("nome") String nome, 
+			@PathParam("email") String email,
+			@PathParam("senha") String senha,
+			@PathParam("idCupom") Long idCupom){
+		Usuario usuario = new Usuario();
+		usuario.setNome(nome);
+		usuario.setEmail(email);
+		usuario.setSenha(senha);
+		Cupom cupom = new Cupom();
+		cupom.setId(idCupom);
+		ArrayList<Cupom> cupomList = new ArrayList<Cupom>();
+		cupomList.add(cupom);
+		usuario.setCupons(cupomList);
+		usuarioBO.inserirUsuario(usuario);
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("/novoLogin/{nome}/{email}/{senha}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response novoUsuario(
+			@PathParam("nome") String nome,
 			@PathParam("email") String email,
 			@PathParam("senha") String senha){
 		Usuario usuario = new Usuario();
 		usuario.setNome(nome);
 		usuario.setEmail(email);
 		usuario.setSenha(senha);
-		usuarioBO.inserirUsuario(usuario);
+		usuarioBO.atualizarUsuario(usuario);
 		return Response.ok().build();
 	}
 		

@@ -31,11 +31,9 @@ public class PromocaoDAO {
 		return em.find(Promocao.class, id);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Promocao> buscarTodos(){
 		String consulta = "select p from Promocao p";		
-		TypedQuery<Promocao> query = 
-				(TypedQuery<Promocao>) em.createQuery(consulta);
+		TypedQuery<Promocao> query = em.createQuery(consulta, Promocao.class);
 		return query.getResultList();
 	}
 }

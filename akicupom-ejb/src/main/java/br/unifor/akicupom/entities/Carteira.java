@@ -9,9 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="carteira")
 public class Carteira implements Serializable {
 
@@ -29,7 +32,10 @@ public class Carteira implements Serializable {
 	@OneToMany
 	private List<Cupom> cupoms;
 	
-	/* Getter e Setters */
+	@OneToOne
+	private Usuario usuario;
+	
+	/* Getters e Setters */
 
 	public Long getId() {
 		return id;
@@ -53,6 +59,14 @@ public class Carteira implements Serializable {
 
 	public void setCupoms(List<Cupom> cupoms) {
 		this.cupoms = cupoms;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
@@ -82,6 +96,6 @@ public class Carteira implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Carteira [id=" + id + ", qtdCupons=" + qtdCupons + ", cupoms=" + cupoms + "]";
-	}
+		return "Carteira [id=" + id + ", qtdCupons=" + qtdCupons + ", cupoms=" + cupoms + ", usuario=" + usuario + "]";
+	}	
 }

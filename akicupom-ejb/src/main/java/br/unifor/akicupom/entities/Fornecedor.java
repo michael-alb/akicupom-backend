@@ -1,16 +1,20 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
+@XmlRootElement
 @Table(name="fornecedor")
 public class Fornecedor implements Serializable {
 
@@ -23,7 +27,10 @@ public class Fornecedor implements Serializable {
 	@Column(nullable=false)
 	private String nome;
 	
-	@Column
+	@Column(nullable=false)
+	private String senha;
+	
+	@Column(nullable=false)
 	private String cnpj;
 	
 	@Column(nullable=false)
@@ -32,8 +39,13 @@ public class Fornecedor implements Serializable {
 	@Column(nullable=false)
 	private String telefone;
 	
-	/* Getters e Setters */
+	/* Mapeamento Relacional */
 	
+	@OneToMany(mappedBy="fornecedor")
+	private List<Promocao> promocao;
+	
+	/* Getters e Setters */
+
 	public Long getId() {
 		return id;
 	}
@@ -48,6 +60,14 @@ public class Fornecedor implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getCnpj() {
@@ -72,6 +92,14 @@ public class Fornecedor implements Serializable {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public List<Promocao> getPromocao() {
+		return promocao;
+	}
+
+	public void setPromocao(List<Promocao> promocao) {
+		this.promocao = promocao;
 	}
 
 	@Override
@@ -101,7 +129,7 @@ public class Fornecedor implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Fornecedor [id=" + id + ", nome=" + nome + ", cnpj=" + cnpj + ", endereco=" + endereco + ", telefone="
-				+ telefone + "]";
+		return "Fornecedor [id=" + id + ", nome=" + nome + ", senha=" + senha + ", cnpj=" + cnpj + ", endereco="
+				+ endereco + ", telefone=" + telefone + ", promocao=" + promocao + "]";
 	}
 }
