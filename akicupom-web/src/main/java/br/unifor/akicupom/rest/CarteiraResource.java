@@ -1,6 +1,5 @@
 package br.unifor.akicupom.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -74,14 +73,13 @@ public class CarteiraResource {
 			@PathParam("idUsuario") Long idUsuario,
 			@PathParam("qtdCupons") int qtdCupons) {
 		Cupom cupom = new Cupom();
-		cupom.setId(idCupom);		
-		ArrayList<Cupom> cupomList = new ArrayList<Cupom>();
-		cupomList.add(cupom);
+		cupom.setId(idCupom);
 		Usuario usuario = new Usuario();
 		usuario.setId(idUsuario);
 		Carteira carteira = new Carteira();
-		carteira.setCupoms(cupomList);
+		carteira.setCupom(cupom);
 		carteira.setUsuario(usuario);
+		carteira.setQtdCupons(qtdCupons);
 		carteiraBO.inserirCarteira(carteira);
 		return Response.ok().build();
 	}

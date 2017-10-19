@@ -63,26 +63,29 @@ public class UsuarioResource {
 		return Response.ok(usuario, MediaType.APPLICATION_JSON).build();
 	}
 	
-	@POST
-	@Path("/novo/{nome}/{email}/{senha}/{idCupom}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response novoUsuario(
-			@PathParam("nome") String nome, 
-			@PathParam("email") String email,
-			@PathParam("senha") String senha,
-			@PathParam("idCupom") Long idCupom){
-		Usuario usuario = new Usuario();
-		usuario.setNome(nome);
-		usuario.setEmail(email);
-		usuario.setSenha(senha);
-		Cupom cupom = new Cupom();
-		cupom.setId(idCupom);
-		ArrayList<Cupom> cupomList = new ArrayList<Cupom>();
-		cupomList.add(cupom);
-		usuario.setCupons(cupomList);
-		usuarioBO.inserirUsuario(usuario);
-		return Response.ok().build();
-	}
+//	@POST
+//	@Path("/novo/{nome}/{email}/{senha}/{idCupom}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response novoUsuario(
+//			@PathParam("nome") String nome, 
+//			@PathParam("email") String email,
+//			@PathParam("senha") String senha,
+//			@PathParam("idCupom") Long idCupom){
+//		Usuario usuario = new Usuario();
+//		usuario.setNome(nome);
+//		usuario.setEmail(email);
+//		usuario.setSenha(senha);
+//		Cupom cupom = new Cupom();
+//		cupom.setId(idCupom);
+//		ArrayList<Cupom> cupomList = new ArrayList<Cupom>();
+//		cupomList.add(cupom);
+//		usuario.setCupons(cupomList);
+//		usuarioBO.inserirUsuario(usuario);
+//		return Response.ok().build();
+//	}
+	
+	
+//	private static final String restNovoLogin = ""/novoLogin/{nome}/{email}/{senha}"";
 	
 	@POST
 	@Path("/novoLogin/{nome}/{email}/{senha}")

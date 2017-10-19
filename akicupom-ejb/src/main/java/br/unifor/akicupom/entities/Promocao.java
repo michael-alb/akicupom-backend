@@ -43,10 +43,7 @@ public class Promocao implements Serializable {
 	/* Mapeamento Relacional */
 
 	@OneToOne
-	private Categoria categoria;
-	
-	@OneToOne(mappedBy="promocao")
-	private Cupom cupom;
+	private Categoria categoria;	
 	
 	@OneToOne
 	private Fornecedor fornecedor;
@@ -117,14 +114,6 @@ public class Promocao implements Serializable {
 		this.categoria = categoria;
 	}	
 
-	public Cupom getCupom() {
-		return cupom;
-	}
-
-	public void setCupom(Cupom cupom) {
-		this.cupom = cupom;
-	}
-
 	public Fornecedor getFornecedor() {
 		return fornecedor;
 	}
@@ -162,6 +151,6 @@ public class Promocao implements Serializable {
 	public String toString() {
 		return "Promocao [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataValidade=" + dataValidade
 				+ ", valor_promocao=" + valor_promocao + ", capa=" + capa + ", status=" + status + ", categoria="
-				+ categoria + ", cupom=" + cupom + ", fornecedor=" + fornecedor + "]";
+				+ categoria + ", fornecedor=" + fornecedor + "]";
 	}
 }

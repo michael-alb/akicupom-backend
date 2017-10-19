@@ -18,7 +18,6 @@ import javax.ws.rs.core.Response.Status;
 import br.unifor.akicupom.BO.CupomBO;
 import br.unifor.akicupom.entities.Cupom;
 import br.unifor.akicupom.entities.Promocao;
-import br.unifor.akicupom.entities.Usuario;
 
 @RequestScoped
 @Path("/akicupom/cupom")
@@ -50,7 +49,7 @@ public class CupomResource {
 	}
 	
 	@POST
-	@Path("/novo/{titulo}/{nome}/{dataValidade}/{dataGeracao}/{codigoCupom}/{usuario}/{promocao}")
+	@Path("/novo/{titulo}/{nome}/{dataValidade}/{dataGeracao}/{codigoCupom}/{promocao}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response novoCupom(
 			@PathParam("titulo") String titulo,
@@ -58,17 +57,13 @@ public class CupomResource {
 			@PathParam("dataValidade") String dataValidade,
 			@PathParam("dataGeracao") String dataGeracao,
 			@PathParam("codigoCupom") String codigoCupom,
-			@PathParam("usuario") Long idUsuario,
 			@PathParam("promocao") Long idPromocao) {
 		Cupom cupom = new Cupom();
 		cupom.setTitulo(titulo);
 		cupom.setNome(nome);
 		cupom.setDataValidade(dataValidade);
 		cupom.setDataGeracao(dataGeracao);
-		cupom.setCodigoCupom(codigoCupom);
-		Usuario usuario = new Usuario();
-		usuario.setId(idUsuario);
-		cupom.setUsuario(usuario);
+		cupom.setCodigoCupom(codigoCupom);		
 		Promocao promocaoObj = new Promocao();
 		promocaoObj.setId(idPromocao);
 		cupom.setPromocao(promocaoObj);
