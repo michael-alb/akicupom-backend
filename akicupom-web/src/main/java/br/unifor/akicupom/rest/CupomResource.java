@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.unifor.akicupom.BO.CupomBO;
+import br.unifor.akicupom.entities.Carteira;
 import br.unifor.akicupom.entities.Cupom;
 import br.unifor.akicupom.entities.Promocao;
 
@@ -68,6 +70,20 @@ public class CupomResource {
 		promocaoObj.setId(idPromocao);
 		cupom.setPromocao(promocaoObj);
 		cupomBO.inserirCupom(cupom);
+		return Response.ok().build();
+	}
+	
+	@PUT
+	@Path("/cupomCarteira/{id}/{idCarteira}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response novoCupomCarteira(
+			@PathParam("id") Long id,
+			@PathParam("idCarteira") Long idCarteira) {
+		Cupom cupom = cupomBO.buscarPorId(id);
+		Carteira carteira = new Carteira();
+		carteira.setId(idCarteira);
+		cupom.setCarteira(carteira);
+		cupomBO.atualizarCupom(cupom);
 		return Response.ok().build();
 	}
 	

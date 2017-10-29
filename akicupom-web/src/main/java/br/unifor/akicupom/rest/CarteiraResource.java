@@ -1,5 +1,7 @@
 package br.unifor.akicupom.rest;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -16,6 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.unifor.akicupom.BO.CarteiraBO;
+import br.unifor.akicupom.BO.CupomBO;
 import br.unifor.akicupom.entities.Carteira;
 import br.unifor.akicupom.entities.Cupom;
 import br.unifor.akicupom.entities.Usuario;
@@ -23,10 +26,13 @@ import br.unifor.akicupom.entities.Usuario;
 @RequestScoped
 @Path("/akicupom/carteira")
 public class CarteiraResource {
-	
+
 	@Inject
 	private CarteiraBO carteiraBO;	
-	
+
+	@Inject
+	private CupomBO cupomBO;
+
 	@GET
 	@Path("/listar")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -37,7 +43,7 @@ public class CarteiraResource {
 		}
 		return Response.ok(carteira).build();
 	}	
-	
+
 	@GET
 	@Path("/listar/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -48,42 +54,39 @@ public class CarteiraResource {
 		}
 		return Response.ok(carteira).build();
 	}
-	
-//	@POST
-//	@Path("novo/{idCupom}/{qtdCupons}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response novoCarteira(
-//			@PathParam("idCupom") Long id,
-//			@PathParam("qtdCupons") int qtdCupons) {
-//		Cupom cupom = new Cupom();
-//		cupom.setId(id);
-//		ArrayList<Cupom> cupomList = new ArrayList<Cupom>();
-//		cupomList.add(cupom);
-//		Carteira carteira = new Carteira();
-//		carteira.setCupoms(cupomList);
-//		carteiraBO.inserirCarteira(carteira);
-//		return Response.ok().build();
-//	}
-	
+
+	//	@POST
+	//	@Path("novo/{idCupom}/{qtdCupons}")
+	//	@Produces(MediaType.APPLICATION_JSON)
+	//	public Response novoCarteira(
+	//			@PathParam("idCupom") Long id,
+	//			@PathParam("qtdCupons") int qtdCupons) {
+	//		Cupom cupom = new Cupom();
+	//		cupom.setId(id);
+	//		ArrayList<Cupom> cupomList = new ArrayList<Cupom>();
+	//		cupomList.add(cupom);
+	//		Carteira carteira = new Carteira();
+	//		carteira.setCupoms(cupomList);
+	//		carteiraBO.inserirCarteira(carteira);
+	//		return Response.ok().build();
+	//	}
+
 	@POST
-	@Path("novo/{idCupom}/{idUsuario}/{qtdCupons}")
+	@Path("novo/{idUsuario}/{qtdCupons}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response novoCarteira(
-			@PathParam("idCupom") Long idCupom,
 			@PathParam("idUsuario") Long idUsuario,
 			@PathParam("qtdCupons") int qtdCupons) {
-		Cupom cupom = new Cupom();
-		cupom.setId(idCupom);
 		Usuario usuario = new Usuario();
-		usuario.setId(idUsuario);
+		usuario.setId(idUsuario);		
 		Carteira carteira = new Carteira();
-		carteira.setCupom(cupom);
-		carteira.setUsuario(usuario);
+		carteira.setUsuario(usuario);		
 		carteira.setQtdCupons(qtdCupons);
 		carteiraBO.inserirCarteira(carteira);
 		return Response.ok().build();
 	}
-	
+
+
 	@DELETE
 	@Path("/remover/{id}")
 	public Response removerCarteira(@PathParam("id") Long id) {

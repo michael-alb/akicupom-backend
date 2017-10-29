@@ -1,6 +1,5 @@
 package br.unifor.akicupom.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -19,7 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.unifor.akicupom.BO.UsuarioBO;
-import br.unifor.akicupom.entities.Cupom;
+import br.unifor.akicupom.entities.Carteira;
 import br.unifor.akicupom.entities.Usuario;
 
 @RequestScoped
@@ -98,10 +97,10 @@ public class UsuarioResource {
 		usuario.setNome(nome);
 		usuario.setEmail(email);
 		usuario.setSenha(senha);
-		usuarioBO.atualizarUsuario(usuario);
+		usuarioBO.inserirUsuario(usuario);
 		return Response.ok().build();
 	}
-		
+	
 	@PUT
 	@Path("/atualizar/{id}/{nome}/{email}/{senha}")
 	public Response atualizarUsuario(

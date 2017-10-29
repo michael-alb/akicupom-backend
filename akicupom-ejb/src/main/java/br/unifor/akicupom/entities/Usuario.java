@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -29,6 +30,10 @@ public class Usuario implements Serializable {
 	
 	@Column(nullable=false)
 	private String senha;
+	
+	/* Mapeamento Relacional */
+	
+	
 	
 	/* Getter e Setters */
 
@@ -62,8 +67,8 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	
+	}	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
