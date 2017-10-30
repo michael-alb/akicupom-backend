@@ -31,11 +31,9 @@ public class CupomDAO {
 		return em.find(Cupom.class, id);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Cupom> buscarTodos(){
 		String consulta = "select c from Cupom c";
-		TypedQuery<Cupom> query = (TypedQuery<Cupom>) 
-		em.createQuery(consulta);
+		TypedQuery<Cupom> query = em.createQuery(consulta, Cupom.class);
 		return query.getResultList();		
 	}	
 }

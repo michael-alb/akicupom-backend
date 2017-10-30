@@ -31,10 +31,9 @@ public class CategoriaDAO {
 		return em.find(Categoria.class, id);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Categoria> buscarTodos(){
 		String consulta = "select c from Categoria c";
-		TypedQuery<Categoria> query = (TypedQuery<Categoria>) em.createQuery(consulta);
+		TypedQuery<Categoria> query = em.createQuery(consulta, Categoria.class);
 		return query.getResultList();
 	}
 }

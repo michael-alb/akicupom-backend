@@ -31,10 +31,9 @@ public class FornecedorDAO {
 		return em.find(Fornecedor.class, id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Fornecedor> buscarTodos(){
 		String consulta = "select f from Fornecedor f";
-		TypedQuery<Fornecedor> query = (TypedQuery<Fornecedor>) em.createQuery(consulta);
+		TypedQuery<Fornecedor> query = em.createQuery(consulta, Fornecedor.class);
 		return query.getResultList();
 	}
 }

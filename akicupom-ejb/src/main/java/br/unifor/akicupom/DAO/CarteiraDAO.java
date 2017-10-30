@@ -31,10 +31,9 @@ public class CarteiraDAO {
 		return em.find(Carteira.class, id);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Carteira> buscarTodos(){
 		String consulta = "select c from Carteira c";
-		TypedQuery<Carteira> query = (TypedQuery<Carteira>) em.createQuery(consulta);
+		TypedQuery<Carteira> query = em.createQuery(consulta, Carteira.class);
 		return query.getResultList();
 	}
 }

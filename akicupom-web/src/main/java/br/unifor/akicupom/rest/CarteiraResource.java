@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -33,7 +32,6 @@ public class CarteiraResource {
 	@GET
 	@Path("/listar")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response listarCarteiras(){
 		List<Carteira> carteira = carteiraBO.verTodasCarteiras();
 		if(carteira == null || carteira.isEmpty()){
@@ -119,8 +117,7 @@ public class CarteiraResource {
 		carteira.setUsuario(usuario);		
 		carteira.setQtdCupons(qtdCupons);
 		
-		carteira.setCupons(cupomLista);	
-				
+		carteira.setCupons(cupomLista);				
 		
 		carteiraBO.inserirCarteira(carteira);
 		return Response.ok().build();

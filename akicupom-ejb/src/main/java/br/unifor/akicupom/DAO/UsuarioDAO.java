@@ -31,10 +31,9 @@ public class UsuarioDAO {
 		return em.find(Usuario.class, id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Usuario> buscarTodos(){
 		String consulta = "select u from Usuario u";		
-		TypedQuery<Usuario> query = (TypedQuery<Usuario>) em.createQuery(consulta);
+		TypedQuery<Usuario> query = em.createQuery(consulta, Usuario.class);
 		return query.getResultList();
 	}
 
