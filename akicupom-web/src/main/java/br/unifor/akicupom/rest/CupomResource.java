@@ -20,6 +20,7 @@ import br.unifor.akicupom.BO.CupomBO;
 import br.unifor.akicupom.entities.Carteira;
 import br.unifor.akicupom.entities.Cupom;
 import br.unifor.akicupom.entities.Promocao;
+import br.unifor.akicupom.entities.Usuario;
 
 @RequestScoped
 @Path("/akicupom/cupom")
@@ -51,7 +52,7 @@ public class CupomResource {
 	}
 	
 	@POST
-	@Path("/novo/{titulo}/{nome}/{dataValidade}/{dataGeracao}/{codigoCupom}/{promocao}")
+	@Path("/novo/{titulo}/{nome}/{dataValidade}/{dataGeracao}/{codigoCupom}/{promocao}/{idUsuario}/{qtdCupons}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response novoCupom(
 			@PathParam("titulo") String titulo,
@@ -59,31 +60,25 @@ public class CupomResource {
 			@PathParam("dataValidade") String dataValidade,
 			@PathParam("dataGeracao") String dataGeracao,
 			@PathParam("codigoCupom") String codigoCupom,
-			@PathParam("promocao") Long idPromocao) {
+			@PathParam("promocao") Long idPromocao,
+			@PathParam("idUsuario") Long idUsuario,
+			@PathParam("qtdCupons") int qtdCupons) {
 		Cupom cupom = new Cupom();
+		Carteira carteira = new Carteira();
+		Usuario usuario = new Usuario();
+		usuario.setId(idUsuario);
+		carteira.setUsuario(usuario);
+		carteira.setQtdCupons(qtdCupons);
 		cupom.setTitulo(titulo);
 		cupom.setNome(nome);
 		cupom.setDataValidade(dataValidade);
 		cupom.setDataGeracao(dataGeracao);
 		cupom.setCodigoCupom(codigoCupom);		
-		Promocao promocaoObj = new Promocao();
-		promocaoObj.setId(idPromocao);
-		cupom.setPromocao(promocaoObj);
-		cupomBO.inserirCupom(cupom);
-		return Response.ok().build();
-	}
-	
-	@PUT
-	@Path("/cupomCarteira/{id}/{idCarteira}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response novoCupomCarteira(
-			@PathParam("id") Long id,
-			@PathParam("idCarteira") Long idCarteira) {
-		Cupom cupom = cupomBO.buscarPorId(id);
-		Carteira carteira = new Carteira();
-		carteira.setId(idCarteira);
+		Promocao promocao = new Promocao();
+		promocao.setId(idPromocao);
+		cupom.setPromocao(promocao);
 		cupom.setCarteira(carteira);
-		cupomBO.atualizarCupom(cupom);
+		cupomBO.inserirCupom(cupom);
 		return Response.ok().build();
 	}
 	

@@ -3,6 +3,7 @@ package br.unifor.akicupom.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +33,9 @@ public class Carteira implements Serializable {
 	@OneToOne
 	private Usuario usuario;
 	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Cupom> cupons;
+	
 	/* Getters e Setters */
 
 	public Long getId() {
@@ -58,6 +62,14 @@ public class Carteira implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	public List<Cupom> getCupons() {
+		return cupons;
+	}
+
+	public void setCupons(List<Cupom> cupons) {
+		this.cupons = cupons;
 	}
 
 	@Override
