@@ -18,7 +18,7 @@ public class CarteiraDAO {
 	public void salvar(Carteira carteira){
 		em.persist(carteira);
 	}
-	
+		
 	public Carteira atualizar(Carteira carteira){
 		return em.merge(carteira);
 	}

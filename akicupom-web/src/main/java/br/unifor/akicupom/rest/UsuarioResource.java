@@ -18,7 +18,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.unifor.akicupom.BO.UsuarioBO;
-import br.unifor.akicupom.entities.Carteira;
 import br.unifor.akicupom.entities.Usuario;
 
 @RequestScoped

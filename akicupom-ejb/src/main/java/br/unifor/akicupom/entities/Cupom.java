@@ -2,14 +2,12 @@ package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,11 +40,8 @@ public class Cupom implements Serializable {
 	
 	/* Mapeamento Relacional */
 	
-	@OneToOne
-	private Promocao promocao;
-	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private Carteira carteira;
+	@OneToOne(fetch=FetchType.EAGER)
+	private Promocao promocao;	
 	
 	/* Getters e Setters */	
 
@@ -104,14 +99,6 @@ public class Cupom implements Serializable {
 
 	public void setPromocao(Promocao promocao) {
 		this.promocao = promocao;
-	}	
-	
-	public Carteira getCarteira() {
-		return carteira;
-	}
-
-	public void setCarteira(Carteira carteira) {
-		this.carteira = carteira;
 	}
 
 	@Override
@@ -142,7 +129,6 @@ public class Cupom implements Serializable {
 	@Override
 	public String toString() {
 		return "Cupom [id=" + id + ", titulo=" + titulo + ", nome=" + nome + ", dataValidade=" + dataValidade
-				+ ", dataGeracao=" + dataGeracao + ", codigoCupom=" + codigoCupom + ", promocao=" + promocao
-				+ ", carteira=" + carteira + "]";
+				+ ", dataGeracao=" + dataGeracao + ", codigoCupom=" + codigoCupom + ", promocao=" + promocao + "]";
 	}
 }
