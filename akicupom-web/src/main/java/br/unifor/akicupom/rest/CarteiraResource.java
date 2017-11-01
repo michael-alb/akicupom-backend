@@ -62,16 +62,16 @@ public class CarteiraResource {
 			@PathParam("idUsuario") Long idUsuario,
 			@PathParam("idCupom") Long idCupom,
 			@PathParam("qtdCupons") int qtdCupons) {
-		Carteira carteira = new Carteira();
 		Usuario usuario = new Usuario();
-		Cupom cupom = new Cupom();		
+		Carteira carteira = new Carteira();
+		Cupom cupom = new Cupom();
 		usuario.setId(idUsuario);
 		cupom = cupomBO.buscarPorId(idCupom);
 		List<Cupom> cupomLista = new LinkedList<Cupom>();
 		cupomLista.add(cupom);
+		carteira.setQtdCupons(qtdCupons);
 		carteira.setCupons(cupomLista);
 		carteira.setUsuario(usuario);
-		carteira.setQtdCupons(qtdCupons);
 		carteiraBO.inserirCarteira(carteira);
 		return Response.ok().build();
 	}

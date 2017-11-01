@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +34,8 @@ public class Usuario implements Serializable {
 	
 	/* Mapeamento Relacional */
 	
-	
+//	@OneToOne(mappedBy="usuario")
+//	private Carteira carteira;
 	
 	/* Getter e Setters */
 
@@ -67,7 +69,15 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}	
+	}
+
+//	public Carteira getCarteira() {
+//		return carteira;
+//	}
+//
+//	public void setCarteira(Carteira carteira) {
+//		this.carteira = carteira;
+//	}
 
 	@Override
 	public int hashCode() {

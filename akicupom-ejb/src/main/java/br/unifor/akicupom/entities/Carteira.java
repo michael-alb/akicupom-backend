@@ -30,11 +30,11 @@ public class Carteira implements Serializable {
 
 	/* Mapeamento Relacional */
 		
-	@OneToOne
-	private Usuario usuario;
-	
 	@OneToMany(fetch=FetchType.EAGER)
 	private List<Cupom> cupons;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	private Usuario usuario;
 	
 	/* Getters e Setters */
 
@@ -54,20 +54,20 @@ public class Carteira implements Serializable {
 		this.qtdCupons = qtdCupons;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 	public List<Cupom> getCupons() {
 		return cupons;
 	}
 
 	public void setCupons(List<Cupom> cupons) {
 		this.cupons = cupons;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
@@ -97,6 +97,6 @@ public class Carteira implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Carteira [id=" + id + ", qtdCupons=" + qtdCupons + ", usuario=" + usuario + ", cupons=" + cupons + "]";
+		return "Carteira [id=" + id + ", qtdCupons=" + qtdCupons + ", cupons=" + cupons + ", usuario=" + usuario + "]";
 	}
 }
