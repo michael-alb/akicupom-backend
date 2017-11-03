@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response.Status;
 
 import br.unifor.akicupom.BO.CarteiraBO;
 import br.unifor.akicupom.BO.CupomBO;
+import br.unifor.akicupom.BO.UsuarioBO;
 import br.unifor.akicupom.entities.Carteira;
 import br.unifor.akicupom.entities.Cupom;
 import br.unifor.akicupom.entities.Usuario;
@@ -31,7 +32,9 @@ public class CarteiraResource {
 	
 	@Inject
 	private CupomBO cupomBO;
-
+	
+	@Inject
+	private UsuarioBO usuarioBO;
 
 	@GET
 	@Path("/listar")
@@ -58,24 +61,43 @@ public class CarteiraResource {
 	@POST
 	@Path("novo/{idUsuario}/{idCupom}/{qtdCupons}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response novoCarteira(
+	public Response novoCarteiraUsuario(
 			@PathParam("idUsuario") Long idUsuario,
 			@PathParam("idCupom") Long idCupom,
 			@PathParam("qtdCupons") int qtdCupons) {
 		Usuario usuario = new Usuario();
 		Carteira carteira = new Carteira();
 		Cupom cupom = new Cupom();
-		usuario.setId(idUsuario);
+		usuario = usuarioBO.buscarPorId(idUsuario);
 		cupom = cupomBO.buscarPorId(idCupom);
 		List<Cupom> cupomLista = new LinkedList<Cupom>();
 		cupomLista.add(cupom);
 		carteira.setQtdCupons(qtdCupons);
-		carteira.setCupons(cupomLista);
+		carteira.setCupons(cupomLista);		
 		carteira.setUsuario(usuario);
 		carteiraBO.inserirCarteira(carteira);
 		return Response.ok().build();
 	}
-
+	
+	@POST
+	@Path("novoCupons/{idCarteira}/{idCupom}/{qtdCupons}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response novoCarteira(
+			@PathParam("idCarteira") Long idCarteira,
+			@PathParam("idCupom") Long idCupom,
+			@PathParam("qtdCupons") int qtdCupons) {
+		Carteira carteira = new Carteira();
+		Cupom cupom = new Cupom();
+		cupom = cupomBO.buscarPorId(idCupom);
+		List<Cupom> cupomLista = new LinkedList<Cupom>();
+		cupomLista.add(cupom);
+		carteira.setId(idCarteira);
+		carteira.setQtdCupons(qtdCupons);
+		carteira.setCupons(cupomLista);
+		carteiraBO.inserirCarteira(carteira);
+		return Response.ok().build();
+	}
+	
 	@DELETE
 	@Path("/remover/{id}")
 	public Response removerCarteira(@PathParam("id") Long id) {

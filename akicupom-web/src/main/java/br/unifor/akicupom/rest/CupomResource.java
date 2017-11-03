@@ -1,5 +1,6 @@
 package br.unifor.akicupom.rest;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -15,9 +16,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import br.unifor.akicupom.BO.CarteiraBO;
 import br.unifor.akicupom.BO.CupomBO;
+import br.unifor.akicupom.BO.UsuarioBO;
+import br.unifor.akicupom.entities.Carteira;
 import br.unifor.akicupom.entities.Cupom;
 import br.unifor.akicupom.entities.Promocao;
+import br.unifor.akicupom.entities.Usuario;
 
 @RequestScoped
 @Path("/akicupom/cupom")
@@ -25,6 +30,12 @@ public class CupomResource {
 
 	@Inject
 	private CupomBO cupomBO;
+	
+	@Inject
+	private UsuarioBO usuarioBO;
+	
+	@Inject
+	private CarteiraBO carteiraBO;
 	
 	@GET
 	@Path("/listar")

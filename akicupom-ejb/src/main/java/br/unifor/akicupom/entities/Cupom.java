@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,28 +23,26 @@ public class Cupom implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(nullable=false)
 	private String titulo;
-	
+
 	@Column(nullable=false)
 	private String nome;	
 
 	@Column(name="data_validade", nullable=false)
 	private String dataValidade;
-	
+
 	@Column(name="data_geracao", nullable=false)
 	private String dataGeracao; 
-	
+
 	@Column(name="cod_cupom", nullable=false)
 	private String codigoCupom;
-	
+
 	/* Mapeamento Relacional */
-	
+
 	@OneToOne(fetch=FetchType.EAGER)
-	private Promocao promocao;	
-	
-	/* Getters e Setters */	
+	private Promocao promocao;
 
 	public Long getId() {
 		return id;

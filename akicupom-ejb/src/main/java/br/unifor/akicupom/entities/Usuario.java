@@ -34,10 +34,8 @@ public class Usuario implements Serializable {
 	
 	/* Mapeamento Relacional */
 	
-//	@OneToOne(mappedBy="usuario")
+//	@OneToOne(mappedBy="usuario", fetch=FetchType.LAZY)
 //	private Carteira carteira;
-	
-	/* Getter e Setters */
 
 	public Long getId() {
 		return id;

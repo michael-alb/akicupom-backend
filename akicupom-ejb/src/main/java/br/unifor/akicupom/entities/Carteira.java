@@ -9,7 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -30,13 +32,14 @@ public class Carteira implements Serializable {
 
 	/* Mapeamento Relacional */
 		
-	@OneToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="carteira_cupom",
+	joinColumns=@JoinColumn(name="carteira_id"),
+	inverseJoinColumns=@JoinColumn(name="cupom_id"))
 	private List<Cupom> cupons;
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	private Usuario usuario;
-	
-	/* Getters e Setters */
 
 	public Long getId() {
 		return id;
@@ -61,7 +64,7 @@ public class Carteira implements Serializable {
 	public void setCupons(List<Cupom> cupons) {
 		this.cupons = cupons;
 	}
-	
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -99,4 +102,6 @@ public class Carteira implements Serializable {
 	public String toString() {
 		return "Carteira [id=" + id + ", qtdCupons=" + qtdCupons + ", cupons=" + cupons + ", usuario=" + usuario + "]";
 	}
+
+	
 }
