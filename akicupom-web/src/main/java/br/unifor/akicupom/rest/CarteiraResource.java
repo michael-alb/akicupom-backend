@@ -59,41 +59,16 @@ public class CarteiraResource {
 	}	
 
 	@POST
-	@Path("novo/{idUsuario}/{idCupom}/{qtdCupons}")
+	@Path("novo/{idUsuario}/{qtdCupons}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response novoCarteiraUsuario(
 			@PathParam("idUsuario") Long idUsuario,
-			@PathParam("idCupom") Long idCupom,
 			@PathParam("qtdCupons") int qtdCupons) {
 		Usuario usuario = new Usuario();
 		Carteira carteira = new Carteira();
-		Cupom cupom = new Cupom();
 		usuario = usuarioBO.buscarPorId(idUsuario);
-		cupom = cupomBO.buscarPorId(idCupom);
-		List<Cupom> cupomLista = new LinkedList<Cupom>();
-		cupomLista.add(cupom);
 		carteira.setQtdCupons(qtdCupons);
-		carteira.setCupons(cupomLista);		
 		carteira.setUsuario(usuario);
-		carteiraBO.inserirCarteira(carteira);
-		return Response.ok().build();
-	}
-	
-	@POST
-	@Path("novoCupons/{idCarteira}/{idCupom}/{qtdCupons}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response novoCarteira(
-			@PathParam("idCarteira") Long idCarteira,
-			@PathParam("idCupom") Long idCupom,
-			@PathParam("qtdCupons") int qtdCupons) {
-		Carteira carteira = new Carteira();
-		Cupom cupom = new Cupom();
-		cupom = cupomBO.buscarPorId(idCupom);
-		List<Cupom> cupomLista = new LinkedList<Cupom>();
-		cupomLista.add(cupom);
-		carteira.setId(idCarteira);
-		carteira.setQtdCupons(qtdCupons);
-		carteira.setCupons(cupomLista);
 		carteiraBO.inserirCarteira(carteira);
 		return Response.ok().build();
 	}

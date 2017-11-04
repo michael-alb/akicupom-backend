@@ -1,7 +1,6 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -32,15 +28,11 @@ public class Carteira implements Serializable {
 
 	/* Mapeamento Relacional */
 		
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="carteira_cupom",
-	joinColumns=@JoinColumn(name="carteira_id"),
-	inverseJoinColumns=@JoinColumn(name="cupom_id"))
-	private List<Cupom> cupons;
-	
 	@OneToOne(fetch=FetchType.EAGER)
 	private Usuario usuario;
 
+	/* Getters e Setters */
+	
 	public Long getId() {
 		return id;
 	}
@@ -55,14 +47,6 @@ public class Carteira implements Serializable {
 
 	public void setQtdCupons(int qtdCupons) {
 		this.qtdCupons = qtdCupons;
-	}
-
-	public List<Cupom> getCupons() {
-		return cupons;
-	}
-
-	public void setCupons(List<Cupom> cupons) {
-		this.cupons = cupons;
 	}
 
 	public Usuario getUsuario() {
@@ -100,8 +84,6 @@ public class Carteira implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Carteira [id=" + id + ", qtdCupons=" + qtdCupons + ", cupons=" + cupons + ", usuario=" + usuario + "]";
+		return "Carteira [id=" + id + ", qtdCupons=" + qtdCupons + ", usuario=" + usuario + "]";
 	}
-
-	
 }

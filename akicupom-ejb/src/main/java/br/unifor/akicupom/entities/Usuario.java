@@ -1,6 +1,7 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -36,7 +40,15 @@ public class Usuario implements Serializable {
 	
 //	@OneToOne(mappedBy="usuario", fetch=FetchType.LAZY)
 //	private Carteira carteira;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="usuario_cupom",
+	joinColumns=@JoinColumn(name="usuario_id"),
+	inverseJoinColumns=@JoinColumn(name="cupom_id"))
+	private List<Cupom> cupons;
 
+	/* Getters e Setters */
+	
 	public Long getId() {
 		return id;
 	}
@@ -77,6 +89,14 @@ public class Usuario implements Serializable {
 //		this.carteira = carteira;
 //	}
 
+	public List<Cupom> getCupons() {
+		return cupons;
+	}
+
+	public void setCupons(List<Cupom> cupons) {
+		this.cupons = cupons;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -104,6 +124,7 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cupons=" + cupons
+				+ "]";
 	}
 }

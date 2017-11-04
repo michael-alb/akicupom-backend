@@ -1,5 +1,6 @@
 package br.unifor.akicupom.rest;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -17,8 +18,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import br.unifor.akicupom.BO.CupomBO;
 import br.unifor.akicupom.BO.UsuarioBO;
 import br.unifor.akicupom.entities.Carteira;
+import br.unifor.akicupom.entities.Cupom;
 import br.unifor.akicupom.entities.Usuario;
 
 @RequestScoped
@@ -27,6 +30,9 @@ public class UsuarioResource {
 
 	@Inject
 	private UsuarioBO usuarioBO;
+	
+	@Inject
+	private CupomBO cupomBO;
 	
 	@GET
 	@Path("/listar")
@@ -73,6 +79,20 @@ public class UsuarioResource {
 		usuario.setNome(nome);
 		usuario.setEmail(email);
 		usuario.setSenha(senha);
+		usuarioBO.inserirUsuario(usuario);
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("/adicionarCupom/{id}/{cupom}")
+	public Response adicionarCupom(
+			@PathParam("id") Long id,
+			@PathParam("cupom") Long idCupom){
+		Usuario usuario = new Usuario();
+		Cupom cupom = cupomBO.buscarPorId(idCupom);
+		List<Cupom> cupomLista = new LinkedList<Cupom>();
+		cupomLista.add(cupom);
+		usuario.setCupons(cupomLista);
 		usuarioBO.inserirUsuario(usuario);
 		return Response.ok().build();
 	}
