@@ -16,9 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.unifor.akicupom.BO.CarteiraBO;
 import br.unifor.akicupom.BO.CupomBO;
-import br.unifor.akicupom.BO.UsuarioBO;
 import br.unifor.akicupom.entities.Carteira;
 import br.unifor.akicupom.entities.Cupom;
 import br.unifor.akicupom.entities.Promocao;
@@ -30,13 +28,13 @@ public class CupomResource {
 
 	@Inject
 	private CupomBO cupomBO;
-	
-	@Inject
+
+	/*@Inject
 	private UsuarioBO usuarioBO;
-	
+
 	@Inject
-	private CarteiraBO carteiraBO;
-	
+	private CarteiraBO carteiraBO;*/
+
 	@GET
 	@Path("/listar")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -47,7 +45,7 @@ public class CupomResource {
 		}
 		return Response.ok(cupom).build();
 	}
-	
+
 	@GET
 	@Path("/listar/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -58,7 +56,7 @@ public class CupomResource {
 		}
 		return Response.ok(cupom).build();
 	}
-	
+
 	@POST
 	@Path("/novo/{titulo}/{nome}/{dataValidade}/{dataGeracao}/{codigoCupom}/{promocao}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -81,7 +79,7 @@ public class CupomResource {
 		cupomBO.inserirCupom(cupom);
 		return Response.ok(cupom).build();
 	}
-	
+
 	@DELETE
 	@Path("/remover/{id}")
 	public Response removerCupom(@PathParam("id") Long id) {

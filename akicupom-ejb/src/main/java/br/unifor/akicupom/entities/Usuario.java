@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,19 +35,11 @@ public class Usuario implements Serializable {
 	@Column(nullable=false)
 	private String senha;
 	
-	/* Mapeamento Relacional */
+	/* Mapeamento Relacional */	
 	
-//	@OneToOne(mappedBy="usuario", fetch=FetchType.LAZY)
-//	private Carteira carteira;
-	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="usuario_cupom",
-	joinColumns=@JoinColumn(name="usuario_id"),
-	inverseJoinColumns=@JoinColumn(name="cupom_id"))
-	private List<Cupom> cupons;
+	@OneToOne
+	private Carteira carteira;
 
-	/* Getters e Setters */
-	
 	public Long getId() {
 		return id;
 	}
@@ -81,20 +72,12 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-//	public Carteira getCarteira() {
-//		return carteira;
-//	}
-//
-//	public void setCarteira(Carteira carteira) {
-//		this.carteira = carteira;
-//	}
-
-	public List<Cupom> getCupons() {
-		return cupons;
+	public Carteira getCarteira() {
+		return carteira;
 	}
 
-	public void setCupons(List<Cupom> cupons) {
-		this.cupons = cupons;
+	public void setCarteira(Carteira carteira) {
+		this.carteira = carteira;
 	}
 
 	@Override
@@ -124,7 +107,7 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cupons=" + cupons
-				+ "]";
-	}
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", carteira="
+				+ carteira + "]";
+	}	
 }

@@ -31,11 +31,11 @@ public class CarteiraResource {
 	private CarteiraBO carteiraBO;	
 	
 	@Inject
-	private CupomBO cupomBO;
+	private UsuarioBO usuarioBO;
 	
 	@Inject
-	private UsuarioBO usuarioBO;
-
+	private CupomBO cupomBO;
+	
 	@GET
 	@Path("/listar")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -58,7 +58,7 @@ public class CarteiraResource {
 		return Response.ok(carteira).build();
 	}	
 
-	@POST
+	/*@POST
 	@Path("novo/{idUsuario}/{qtdCupons}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response novoCarteiraUsuario(
@@ -67,11 +67,44 @@ public class CarteiraResource {
 		Usuario usuario = new Usuario();
 		Carteira carteira = new Carteira();
 		usuario = usuarioBO.buscarPorId(idUsuario);
-		carteira.setQtdCupons(qtdCupons);
 		carteira.setUsuario(usuario);
 		carteiraBO.inserirCarteira(carteira);
 		return Response.ok().build();
+	}*/
+	
+	@POST
+	@Path("/novoCarteira/{idUsuario}/{idCupom}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response novoCarteiraUsuario(
+			@PathParam("idUsuario") Long idUsuario,
+			@PathParam("idCupom") Long idCupom) {
+		Carteira carteira = new Carteira();
+		Usuario usuario = new Usuario();
+		Cupom cupom = new Cupom();
+		usuario.setId(idUsuario);
+		cupom.setId(idCupom);
+		List<Cupom> cupomLista = new LinkedList<Cupom>();
+		cupomLista.add(cupom);				
+		carteira.setUsuario(usuario);
+		carteira.setCupons(cupomLista);
+		carteiraBO.inserirCarteira(carteira);
+		return Response.ok().build();
 	}
+	
+	/*@POST
+	@Path("/novoCupomCarteira/{idCarteira}/{idUsuario}/{idCupom}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response novoCarteiraCupom(
+			@PathParam("idCarteira") Long idCarteira,
+			@PathParam("idCupom") Long idCupom) {
+		Carteira carteira = carteiraBO.buscarPorId(idCarteira);
+		Cupom cupom = cupomBO.buscarPorId(idCupom);
+		List<Cupom> cupomLista = new LinkedList<Cupom>();
+		cupomLista.add(cupom);
+		carteira.setCupons(cupomLista);		
+		carteiraBO.inserirCarteira(carteira);
+		return Response.ok().build();
+	}*/
 	
 	@DELETE
 	@Path("/remover/{id}")

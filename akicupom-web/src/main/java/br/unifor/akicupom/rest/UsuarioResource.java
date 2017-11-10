@@ -18,7 +18,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.unifor.akicupom.BO.CupomBO;
+import org.w3c.dom.ls.LSInput;
+
 import br.unifor.akicupom.BO.UsuarioBO;
 import br.unifor.akicupom.entities.Carteira;
 import br.unifor.akicupom.entities.Cupom;
@@ -30,9 +31,6 @@ public class UsuarioResource {
 
 	@Inject
 	private UsuarioBO usuarioBO;
-	
-	@Inject
-	private CupomBO cupomBO;
 	
 	@GET
 	@Path("/listar")
@@ -83,19 +81,18 @@ public class UsuarioResource {
 		return Response.ok().build();
 	}
 	
-	@POST
-	@Path("/adicionarCupom/{id}/{cupom}")
-	public Response adicionarCupom(
+	@PUT
+	@Path("/atualizar/{id}/{idCarteira}")
+	public Response inserirCarteira(
 			@PathParam("id") Long id,
-			@PathParam("cupom") Long idCupom){
-		Usuario usuario = new Usuario();
-		Cupom cupom = cupomBO.buscarPorId(idCupom);
-		List<Cupom> cupomLista = new LinkedList<Cupom>();
-		cupomLista.add(cupom);
-		usuario.setCupons(cupomLista);
-		usuarioBO.inserirUsuario(usuario);
+			@PathParam("idCarteira") Long idCarteira){
+		Carteira carteira = new Carteira();
+		carteira.setId(idCarteira);
+		Usuario usuario = usuarioBO.buscarPorId(id);
+		usuario.setCarteira(carteira);
+		usuarioBO.atualizarUsuario(usuario);
 		return Response.ok().build();
-	}
+	}	
 	
 	@PUT
 	@Path("/atualizar/{id}/{nome}/{email}/{senha}")
