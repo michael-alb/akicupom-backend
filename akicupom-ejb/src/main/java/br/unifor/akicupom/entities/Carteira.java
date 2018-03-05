@@ -1,17 +1,23 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="carteira")
 public class Carteira implements Serializable {
 
@@ -20,16 +26,20 @@ public class Carteira implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column
 	private int qtdCupons;
-	
+
 	/* Mapeamento Relacional */
+		
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="carteira_cupom",
+	joinColumns=@JoinColumn(name="carteira_id"),
+	inverseJoinColumns=@JoinColumn(name="cupom_id"))
+	private List<Cupom> cupons;
 	
-	@OneToMany
-	private Collection<Cupom> cupoms;
-	
-	/* Getter e Setters */
+	@OneToOne(fetch=FetchType.EAGER)
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -47,12 +57,20 @@ public class Carteira implements Serializable {
 		this.qtdCupons = qtdCupons;
 	}
 
-	public Collection<Cupom> getCupoms() {
-		return cupoms;
+	public List<Cupom> getCupons() {
+		return cupons;
 	}
 
-	public void setCupoms(Collection<Cupom> cupoms) {
-		this.cupoms = cupoms;
+	public void setCupons(List<Cupom> cupons) {
+		this.cupons = cupons;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
@@ -82,6 +100,8 @@ public class Carteira implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Carteira [id=" + id + ", qtdCupons=" + qtdCupons + ", cupoms=" + cupoms + "]";
+		return "Carteira [id=" + id + ", qtdCupons=" + qtdCupons + ", cupons=" + cupons + ", usuario=" + usuario + "]";
 	}
+
+	
 }

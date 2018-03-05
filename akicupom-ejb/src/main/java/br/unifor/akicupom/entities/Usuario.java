@@ -1,19 +1,19 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="usuario")
 public class Usuario implements Serializable {
 
@@ -28,18 +28,15 @@ public class Usuario implements Serializable {
 
 	@Column(nullable=false)
 	private String email;
-
-	/* Mapeamento Relacional */
-
-	@OneToMany
-	private Collection<Cupom> cupoms;
-
-	@OneToOne
-	@JoinColumn
-	private Carteira carteira;
-
-	/* Getter e Setters */
 	
+	@Column(nullable=false)
+	private String senha;
+	
+	/* Mapeamento Relacional */
+	
+//	@OneToOne(mappedBy="usuario", fetch=FetchType.LAZY)
+//	private Carteira carteira;
+
 	public Long getId() {
 		return id;
 	}
@@ -64,21 +61,21 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
-	public Collection<Cupom> getCupom() {
-		return cupoms;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setCupom(Collection<Cupom> cupom) {
-		this.cupoms = cupom;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
-	public Carteira getCarteira() {
-		return carteira;
-	}
-
-	public void setCarteira(Carteira carteira) {
-		this.carteira = carteira;
-	}
+//	public Carteira getCarteira() {
+//		return carteira;
+//	}
+//
+//	public void setCarteira(Carteira carteira) {
+//		this.carteira = carteira;
+//	}
 
 	@Override
 	public int hashCode() {
@@ -107,7 +104,6 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", cupom=" + cupoms + ", carteira="
-				+ carteira + "]";
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
 	}
 }

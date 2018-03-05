@@ -1,6 +1,6 @@
 package br.unifor.akicupom.BO;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -31,7 +31,7 @@ public class FornecedorBO {
 		return fornecedorDAO.buscarPorId(id);
 	}
 	
-	public Collection<Fornecedor> verTodosUsuarios(){
+	public List<Fornecedor> verTodosFornecedores(){
 		return fornecedorDAO.buscarTodos();
 	}
 }

@@ -1,6 +1,6 @@
 package br.unifor.akicupom.BO;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -15,7 +15,6 @@ public class CategoriaBO {
 	private CategoriaDAO categoriaDAO;
 	
 	public void inserirCategoria(Categoria categoria){
-		categoria.setNome("Restaurantes");
 		categoriaDAO.salvar(categoria);
 	}
 	
@@ -32,7 +31,7 @@ public class CategoriaBO {
 		return categoriaDAO.buscarPorId(id);
 	}
 	
-	public Collection<Categoria> verTodasCategorias(){
+	public List<Categoria> verTodasCategorias(){
 		return categoriaDAO.buscarTodos();
 	}
 }

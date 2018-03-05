@@ -1,6 +1,6 @@
 package br.unifor.akicupom.BO;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -31,7 +31,7 @@ public class CupomBO {
 		return cupomDAO.buscarPorId(id);
 	}
 	
-	public Collection<Cupom> verTodosCupons(){
+	public List<Cupom> verTodosCupons(){
 		return cupomDAO.buscarTodos();
 	}
 }

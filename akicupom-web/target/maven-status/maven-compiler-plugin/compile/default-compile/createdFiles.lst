@@ -5,6 +5,7 @@ br/unifor/akicupom/rest/CategoriaResource.class
 br/unifor/akicupom/controller/MemberController.class
 br/unifor/akicupom/rest/PromocaoResource.class
 br/unifor/akicupom/util/WebResources.class
+br/unifor/akicupom/rest/FornecedorResource.class
 br/unifor/akicupom/rest/CarteiraResource.class
 br/unifor/akicupom/rest/RESTCorsRequestFilter.class
 br/unifor/akicupom/rest/JaxRsActivator.class

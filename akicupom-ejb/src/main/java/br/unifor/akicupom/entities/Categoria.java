@@ -1,18 +1,17 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="categoria")
 public class Categoria implements Serializable {
 
@@ -23,16 +22,10 @@ public class Categoria implements Serializable {
 	private Long id;
 	
 	@Column(nullable=false)	
-	private String nome;
-	
-	/* Mapeamento Relacional */
-	
-	@OneToMany
-	private Collection<Cupom> cupoms;
-	
-	@OneToOne(mappedBy="categoria")
-	private Promocao promocoes;
+	private String nome;	
 
+	 /* Getter e Setters */
+	
 	public Long getId() {
 		return id;
 	}
@@ -47,24 +40,6 @@ public class Categoria implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Collection<Cupom> getCupoms() {
-		return cupoms;
-	}
-
-	public void setCupoms(Collection<Cupom> cupoms) {
-		this.cupoms = cupoms;
-	}
-
-	
-
-	public Promocao getPromocoes() {
-		return promocoes;
-	}
-
-	public void setPromocoes(Promocao promocoes) {
-		this.promocoes = promocoes;
 	}
 
 	@Override
@@ -94,6 +69,6 @@ public class Categoria implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nome=" + nome + ", cupoms=" + cupoms + ", promocoes=" + promocoes + "]";
+		return "Categoria [id=" + id + ", nome=" + nome + "]";
 	}
 }

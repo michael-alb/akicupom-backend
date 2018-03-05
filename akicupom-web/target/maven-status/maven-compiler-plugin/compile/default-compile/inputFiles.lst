@@ -1,4 +1,5 @@
 /home/adriano/git/akicupom-backend/akicupom-web/src/main/java/br/unifor/akicupom/rest/CategoriaResource.java
+/home/adriano/git/akicupom-backend/akicupom-web/src/main/java/br/unifor/akicupom/rest/FornecedorResource.java
 /home/adriano/git/akicupom-backend/akicupom-web/src/main/java/br/unifor/akicupom/rest/CarteiraResource.java
 /home/adriano/git/akicupom-backend/akicupom-web/src/main/java/br/unifor/akicupom/rest/RESTCorsRequestFilter.java
 /home/adriano/git/akicupom-backend/akicupom-web/src/main/java/br/unifor/akicupom/controller/MemberController.java

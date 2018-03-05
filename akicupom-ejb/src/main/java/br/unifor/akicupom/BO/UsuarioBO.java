@@ -1,6 +1,6 @@
 package br.unifor.akicupom.BO;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -31,11 +31,11 @@ public class UsuarioBO {
 		return usuarioDAO.buscarPorId(id);
 	}
 	
-	public Collection<Usuario> verTodosUsuarios(){
+	public List<Usuario> verTodosUsuarios(){
 		return usuarioDAO.buscarTodos();
 	}
 	
-	public Collection<Usuario> verTodosUsuariosId(){
-		return usuarioDAO.buscarTodosPorId();
+	public List<Usuario> verTodosUsuariosNome(){
+		return usuarioDAO.buscarTodosPorNome();
 	}
 }

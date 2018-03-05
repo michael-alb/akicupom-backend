@@ -1,18 +1,20 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="cupom")
 public class Cupom implements Serializable {
 
@@ -21,31 +23,26 @@ public class Cupom implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(nullable=false)
 	private String titulo;
-	
+
 	@Column(nullable=false)
 	private String nome;	
 
 	@Column(name="data_validade", nullable=false)
 	private String dataValidade;
-	
+
 	@Column(name="data_geracao", nullable=false)
 	private String dataGeracao; 
-	
+
 	@Column(name="cod_cupom", nullable=false)
 	private String codigoCupom;
-	
+
 	/* Mapeamento Relacional */
-	
-	@OneToOne
+
+	@OneToOne(fetch=FetchType.EAGER)
 	private Promocao promocao;
-	
-	@OneToMany
-	private Collection<Usuario> usuarios;
-	
-	/* Getters e Setters */
 
 	public Long getId() {
 		return id;
@@ -103,14 +100,6 @@ public class Cupom implements Serializable {
 		this.promocao = promocao;
 	}
 
-	public Collection<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(Collection<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -139,7 +128,6 @@ public class Cupom implements Serializable {
 	@Override
 	public String toString() {
 		return "Cupom [id=" + id + ", titulo=" + titulo + ", nome=" + nome + ", dataValidade=" + dataValidade
-				+ ", dataGeracao=" + dataGeracao + ", codigoCupom=" + codigoCupom + ", promocao=" + promocao
-				+ ", usuarios=" + usuarios + "]";
+				+ ", dataGeracao=" + dataGeracao + ", codigoCupom=" + codigoCupom + ", promocao=" + promocao + "]";
 	}
 }

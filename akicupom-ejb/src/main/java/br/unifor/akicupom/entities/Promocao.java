@@ -1,20 +1,19 @@
 package br.unifor.akicupom.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="promocao")
 public class Promocao implements Serializable {
 
@@ -36,7 +35,7 @@ public class Promocao implements Serializable {
 	@Column
 	private Long valor_promocao;
 
-	@Column(nullable=false)
+	@Column
 	private String capa;
 	
 	@Column
@@ -44,17 +43,13 @@ public class Promocao implements Serializable {
 	
 	/* Mapeamento Relacional */
 
-	@OneToMany
-	private Collection<Cupom> cupoms;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="promo_cat")
-	private Categoria categoria;
-	
 	@OneToOne
+	private Categoria categoria;	
+	
+	@ManyToOne
 	private Fornecedor fornecedor;
 	
-	/* Getter e Setters */
+	/* Getters e Setters */
 
 	public Long getId() {
 		return id;
@@ -112,21 +107,13 @@ public class Promocao implements Serializable {
 		this.status = status;
 	}
 
-	public Collection<Cupom> getCupoms() {
-		return cupoms;
-	}
-
-	public void setCupoms(Collection<Cupom> cupoms) {
-		this.cupoms = cupoms;
-	}
-
 	public Categoria getCategoria() {
 		return categoria;
 	}
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
-	}
+	}	
 
 	public Fornecedor getFornecedor() {
 		return fornecedor;
@@ -164,7 +151,7 @@ public class Promocao implements Serializable {
 	@Override
 	public String toString() {
 		return "Promocao [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataValidade=" + dataValidade
-				+ ", valor_promocao=" + valor_promocao + ", capa=" + capa + ", status=" + status + ", cupoms=" + cupoms
-				+ ", categoria=" + categoria + ", fornecedor=" + fornecedor + "]";
+				+ ", valor_promocao=" + valor_promocao + ", capa=" + capa + ", status=" + status + ", categoria="
+				+ categoria + ", fornecedor=" + fornecedor + "]";
 	}
 }
